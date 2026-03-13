@@ -1,6 +1,7 @@
 package main.models;
 
 import main.enums.*;
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Reservation {
@@ -12,8 +13,13 @@ public class Reservation {
     private Equipment equipment;
     private User user;
 
-    public Reservation(String reservationId, LocalDateTime startTime, LocalDateTime endTime,
-                       ReservationStatus status, double depositAmount, Equipment equipment, User user) {
+    public Reservation(String reservationId,
+                       LocalDateTime startTime,
+                       LocalDateTime endTime,
+                       ReservationStatus status,
+                       double depositAmount,
+                       Equipment equipment,
+                       User user) {
         this.reservationId = reservationId;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -23,26 +29,70 @@ public class Reservation {
         this.user = user;
     }
 
-    // Methods
-    public void create() {
-        this.status = ReservationStatus.Active;
+    public void activate() {
+        if (status != ReservationStatus.Active) {
+            status = ReservationStatus.Active;
+        }
     }
 
-    public void modify() {
+    public void modify(LocalDateTime newStartTime, LocalDateTime newEndTime, LocalDateTime now) {
+        if (now.isAfter(startTime) || now.isEqual(startTime)) {
+            throw new IllegalStateException("Cannot modify after reservation start time.");
+        }
+        if (newStartTime == null || newEndTime == null || !newEndTime.isAfter(newStartTime)) {
+            throw new IllegalArgumentException("Invalid start or end time.");
+        }
+        this.startTime = newStartTime;
+        this.endTime = newEndTime;
     }
 
-    public void cancel() {
-        this.status = ReservationStatus.Cancelled;
+    public void cancel(LocalDateTime now) {
+        if (now.isAfter(startTime) || now.isEqual(startTime)) {
+            throw new IllegalStateException("Cannot cancel after reservation start time.");
+        }
+        status = ReservationStatus.Cancelled;
     }
 
-    public void extend() {
+    public void extend(LocalDateTime newEndTime) {
+        if (newEndTime == null || !newEndTime.isAfter(endTime)) {
+            throw new IllegalArgumentException("New end time must be after current end time.");
+        }
+        this.endTime = newEndTime;
     }
 
-    public double calculateCost() {
-        return 0.0;
+    public double calculateCost(double hourlyRate, LocalDateTime actualEndTime) {
+        if (status == ReservationStatus.NoShow) {
+            return 0.0;
+        }
+        LocalDateTime effectiveEnd = actualEndTime != null && actualEndTime.isAfter(startTime)
+                ? actualEndTime
+                : endTime;
+        if (!effectiveEnd.isAfter(startTime)) {
+            return 0.0;
+        }
+        long minutes = Duration.between(startTime, effectiveEnd).toMinutes();
+        double hours = minutes / 60.0;
+        if (hours <= 0) {
+            return 0.0;
+        }
+        double totalCost = hours * hourlyRate;
+        if (totalCost <= depositAmount) {
+            return 0.0;
+        }
+        return totalCost - depositAmount;
     }
 
-    public void checkArrival() {
+    public void checkArrival(LocalDateTime arrivalTime) {
+        if (arrivalTime == null) {
+            status = ReservationStatus.NoShow;
+            return;
+        }
+        LocalDateTime latestOnTime = startTime.plusMinutes(20);
+        if (arrivalTime.isAfter(latestOnTime)) {
+            status = ReservationStatus.NoShow;
+        } else {
+            status = ReservationStatus.Active;
+        }
     }
 
     // Getters and Setters

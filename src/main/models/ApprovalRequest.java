@@ -11,7 +11,6 @@ public class ApprovalRequest {
         this.status = status;
     }
 
-    // Methods
     public void submit() {
         this.status = AccountStatus.PendingApproval;
     }

@@ -19,7 +19,6 @@ public class Equipment {
         this.sensors = new ArrayList<>();
     }
 
-    // Methods
     public void enable() {
         this.status = EquipmentStatus.Available;
     }
@@ -32,7 +31,7 @@ public class Equipment {
         this.status = EquipmentStatus.Maintenance;
     }
 
-    public boolean isAvailable(String timeSlot) {
+    public boolean isAvailable() {
         return this.status == EquipmentStatus.Available;
     }
 

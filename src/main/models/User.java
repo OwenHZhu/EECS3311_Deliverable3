@@ -4,38 +4,69 @@ import main.enums.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public abstract class User {
     private String userId;
     private String name;
     private String email;
     private String password;
+    private String idOrCertificationNumber;
     private String department;
     private AccountStatus status;
     private List<Reservation> reservations;
     private List<Payment> payments;
     private List<ApprovalRequest> approvalRequests;
+    private final boolean universityAffiliated;
 
-    public User(String userId, String name, String email, String password, String department, AccountStatus status) {
+    public User(String userId,
+                String name,
+                String email,
+                String password,
+                String idOrCertificationNumber,
+                String department,
+                AccountStatus status,
+                boolean universityAffiliated) {
         this.userId = userId;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.idOrCertificationNumber = idOrCertificationNumber;
         this.department = department;
         this.status = status;
+        this.universityAffiliated = universityAffiliated;
         this.reservations = new ArrayList<>();
         this.payments = new ArrayList<>();
         this.approvalRequests = new ArrayList<>();
     }
 
-    // Methods
-    public void register() {
+    public abstract double getHourlyRate();
+
+    public boolean isPasswordStrong() {
+        if (password == null || password.length() < 8) {
+            return false;
+        }
+
+        boolean hasUpper = false;
+        boolean hasLower = false;
+        boolean hasDigit = false;
+        boolean hasSymbol = false;
+
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                hasUpper = true;
+            } else if (Character.isLowerCase(c)) {
+                hasLower = true;
+            } else if (Character.isDigit(c)) {
+                hasDigit = true;
+            } else {
+                hasSymbol = true;
+            }
+        }
+        
+        return hasUpper && hasLower && hasDigit && hasSymbol;
     }
 
-    public boolean login() {
-        return false;
-    }
-
-    public void updateProfile() {
+    public boolean isUniversityAffiliated() {
+        return universityAffiliated;
     }
 
     // Getters and Setters
@@ -69,6 +100,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getIdOrCertificationNumber() {
+        return idOrCertificationNumber;
+    }
+
+    public void setIdOrCertificationNumber(String idOrCertificationNumber) {
+        this.idOrCertificationNumber = idOrCertificationNumber;
     }
 
     public String getDepartment() {

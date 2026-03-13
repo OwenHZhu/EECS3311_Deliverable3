@@ -13,11 +13,16 @@ public class Payment {
         this.method = method;
     }
 
-    // Methods
-    public void processPayment() {
+    public boolean processPayment() {
+        return amount >= 0.0;
     }
 
-    public void refund() {
+    public boolean refund(double refundAmount) {
+        if (refundAmount < 0 || refundAmount > amount) {
+            return false;
+        }
+        amount -= refundAmount;
+        return true;
     }
 
     // Getters and Setters
