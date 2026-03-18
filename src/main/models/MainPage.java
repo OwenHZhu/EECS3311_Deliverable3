@@ -29,10 +29,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class MainPage extends JFrame {
 
 	private JPanel contentPane;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -109,15 +111,83 @@ public class MainPage extends JFrame {
 					.addContainerGap(41, Short.MAX_VALUE))
 		);
 		panel_1.setLayout(gl_panel_1);
+		
+		JPanel panel_4 = new JPanel();
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 929, Short.MAX_VALUE)
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGap(38)
+					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 844, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(47, Short.MAX_VALUE))
 		);
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 553, Short.MAX_VALUE)
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGap(31)
+					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 483, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(39, Short.MAX_VALUE))
 		);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		
+		JButton btnNewButton_1 = new JButton("Make Reservation");
+		btnNewButton_1.addActionListener(e -> {
+			int selectedRow = table.getSelectedRow();
+
+		    if (selectedRow == -1) {
+		    	  ReservationNotChosenError dialog = new ReservationNotChosenError();
+		    	  dialog.setLocationRelativeTo(this);
+		          dialog.setVisible(true);
+		          return;
+		    }
+
+			
+		});
+		btnNewButton_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+		btnNewButton_1.setBackground(new Color(218, 163, 181));
+		btnNewButton_1.setForeground(new Color(146, 54, 72));
+		
+		JLabel lblNewLabel_2 = new JLabel("Want to make a reservation? Choose an item and click here!");
+		lblNewLabel_2.setForeground(new Color(146, 54, 72));
+		lblNewLabel_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
+		gl_panel_4.setHorizontalGroup(
+			gl_panel_4.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_4.createSequentialGroup()
+					.addGap(33)
+					.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_panel_4.createSequentialGroup()
+							.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 568, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE))
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 776, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(35, Short.MAX_VALUE))
+		);
+		gl_panel_4.setVerticalGroup(
+			gl_panel_4.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_4.createSequentialGroup()
+					.addGap(32)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 343, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(gl_panel_4.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_2)
+						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
+					.addGap(66))
+		);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Equipment ID", "Description", "Location", "Status"
+			}
+		));
+		table.setShowVerticalLines(false);
+		table.setFont(new Font("Trebuchet MS", Font.PLAIN, 18));
+		scrollPane.setViewportView(table);
+		panel_4.setLayout(gl_panel_4);
 		panel_2.setLayout(gl_panel_2);
 		
 		JLabel lblNewLabel = new JLabel("Hello, ");
