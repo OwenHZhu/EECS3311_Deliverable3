@@ -21,6 +21,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class Login extends JFrame {
 
@@ -31,9 +32,9 @@ public class Login extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
-	private JTextField textField;
 	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabel_5;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -103,11 +104,6 @@ public class Login extends JFrame {
 		lblNewLabel_3.setForeground(new Color(138, 55, 84));
 		lblNewLabel_3.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
 		
-		textField = new JTextField();
-		textField.setForeground(Color.BLACK);
-		textField.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-		textField.setColumns(10);
-		
 		JButton btnNewButton = new JButton("Sign Up!");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -129,22 +125,25 @@ public class Login extends JFrame {
 		btnLogin.setBackground(new Color(138, 55, 84));
 		btnLogin.setForeground(new Color(255, 255, 255));
 		btnLogin.setFont(new Font("Trebuchet MS", Font.PLAIN, 18));
+		
+		passwordField = new JPasswordField();
+		passwordField.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap(58, Short.MAX_VALUE)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel_1.createSequentialGroup()
 							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
 							.addGap(205))
-						.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 443, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtLogin, GroupLayout.PREFERRED_SIZE, 443, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE))
+								.addComponent(txtLogin, GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+								.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
+								.addComponent(passwordField))
 							.addGap(49))))
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addGap(76)
@@ -165,14 +164,14 @@ public class Login extends JFrame {
 					.addGap(42)
 					.addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+					.addGap(14)
 					.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
 					.addGap(93)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(42, Short.MAX_VALUE))
+					.addContainerGap(65, Short.MAX_VALUE))
 		);
 		panel_1.setLayout(gl_panel_1);
 		

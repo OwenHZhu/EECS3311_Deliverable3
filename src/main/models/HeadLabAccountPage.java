@@ -20,15 +20,10 @@ import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel;
-import javax.swing.JScrollPane;
 
-public class MyReservationPage extends JFrame {
+public class HeadLabAccountPage extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -37,7 +32,7 @@ public class MyReservationPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MyReservationPage frame = new MyReservationPage();
+					HeadLabAccountPage frame = new HeadLabAccountPage();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +44,7 @@ public class MyReservationPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MyReservationPage() {
+	public HeadLabAccountPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1366, 839);
 		contentPane = new JPanel();
@@ -85,12 +80,12 @@ public class MyReservationPage extends JFrame {
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 553, GroupLayout.PREFERRED_SIZE))
 		);
 		
-		JLabel lblNewLabel = new JLabel("MY RESERVATION");
+		JLabel lblNewLabel = new JLabel("ACCOUNT");
 		lblNewLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 44));
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		
-		JButton btnNewButton = new JButton("<- Find more lab equipment item");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnNewButton_1 = new JButton("<- Find more lab equipment item");
+		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainPage MainPage = new MainPage();
 				MainPage.setVisible(true);
@@ -99,23 +94,23 @@ public class MyReservationPage extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnNewButton.setForeground(new Color(146, 54, 72));
-		btnNewButton.setBackground(new Color(239, 239, 239));
-		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		btnNewButton_1.setForeground(new Color(146, 54, 72));
+		btnNewButton_1.setBackground(new Color(239, 239, 239));
+		btnNewButton_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		btnNewButton_1.setHorizontalAlignment(SwingConstants.LEFT);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addGap(43)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 436, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(451, Short.MAX_VALUE))
-				.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 930, Short.MAX_VALUE)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(662, Short.MAX_VALUE))
+				.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 930, Short.MAX_VALUE)
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addComponent(btnNewButton)
+					.addComponent(btnNewButton_1)
 					.addGap(31)
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(58, Short.MAX_VALUE))
@@ -136,91 +131,73 @@ public class MyReservationPage extends JFrame {
 							.addContainerGap()
 							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 518, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel_2.createSequentialGroup()
-							.addGap(36)
-							.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 844, GroupLayout.PREFERRED_SIZE)))
+							.addGap(27)
+							.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 853, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(49, Short.MAX_VALUE))
 		);
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_2.createSequentialGroup()
-					.addGap(72)
-					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addGap(48)
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
+					.addGap(46)
 					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-					.addGap(41))
+					.addContainerGap())
 		);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		JLabel lblNewLabel_2 = new JLabel("Name: ");
+		lblNewLabel_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
 		
-		JLabel lblNewLabel_2 = new JLabel("Want to make changes? Choose the reservation and click here!");
-		lblNewLabel_2.setForeground(new Color(146, 54, 72));
-		lblNewLabel_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+		JLabel lblNewLabel_2_1_1 = new JLabel("User ID:");
+		lblNewLabel_2_1_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
 		
-		JButton btnNewButton_1 = new JButton("Make Changes");
-		btnNewButton_1.addActionListener(e -> {
-			int selectedRow = table.getSelectedRow();
-
-		    if (selectedRow == -1) {
-		    	  ReservationNotChosenError dialog = new ReservationNotChosenError();
-		    	  dialog.setLocationRelativeTo(this);
-		          dialog.setVisible(true);
-		          return;
-		    }
-
-			
-		});
-				
-		btnNewButton_1.setForeground(new Color(146, 54, 72));
-		btnNewButton_1.setBackground(new Color(218, 163, 181));
-		btnNewButton_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		JLabel lblNewLabel_2_1 = new JLabel("Status:");
+		lblNewLabel_2_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
+		
+		JLabel lblNewLabel_2_1_2 = new JLabel("Email: ");
+		lblNewLabel_2_1_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
+		
+		JLabel lblNewLabel_2_1_2_1 = new JLabel("Department:");
+		lblNewLabel_2_1_2_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
+		
+		JButton btnNewButton = new JButton("Edit");
+		btnNewButton.setForeground(new Color(146, 54, 72));
+		btnNewButton.setBackground(new Color(218, 163, 181));
+		btnNewButton.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
-					.addContainerGap()
+					.addGap(22)
 					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
-						.addGroup(gl_panel_3.createSequentialGroup()
-							.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 615, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
+						.addComponent(lblNewLabel_2_1_2, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_2_1_2_1, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(683, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
+					.addContainerGap(734, Short.MAX_VALUE)
+					.addComponent(btnNewButton)
+					.addGap(30))
 		);
 		gl_panel_3.setVerticalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+					.addGap(22)
+					.addComponent(lblNewLabel_2)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_2)
-						.addComponent(btnNewButton_1))
-					.addGap(20))
+					.addComponent(lblNewLabel_2_1_1)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblNewLabel_2_1)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblNewLabel_2_1_2, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblNewLabel_2_1_2_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+					.addGap(27)
+					.addComponent(btnNewButton)
+					.addContainerGap(26, Short.MAX_VALUE))
 		);
-		
-		table = new JTable();
-		table.setShowVerticalLines(false);
-		scrollPane.setViewportView(table);
-		table.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
-		table.setForeground(new Color(0, 0, 0));
-		table.setToolTipText("");
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Reservation ID", "Equipment Item", "User ID", "Start Time", "End Time", "Status"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, Integer.class, Object.class, Object.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		table.getColumnModel().getColumn(0).setPreferredWidth(84);
-		table.getColumnModel().getColumn(1).setPreferredWidth(90);
 		panel_3.setLayout(gl_panel_3);
 		panel_2.setLayout(gl_panel_2);
 		
@@ -235,16 +212,15 @@ public class MyReservationPage extends JFrame {
 		panel_3_1_2.setForeground(Color.WHITE);
 		panel_3_1_2.setBackground(new Color(218, 163, 181));
 		
-		
-		
 		JButton btnAccount = new JButton("ACCOUNT");
 		btnAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AccountPage AccountFrame = new AccountPage();
-				AccountFrame.setVisible(true);
-				AccountFrame.pack();
-				AccountFrame.setLocationRelativeTo(null);
-				setVisible(false);
+					AccountPage AccountFrame = new AccountPage();
+					AccountFrame.setVisible(true);
+					AccountFrame.pack();
+					AccountFrame.setLocationRelativeTo(null);
+					setVisible(false);
+				
 			}
 		});
 		btnAccount.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -268,12 +244,37 @@ public class MyReservationPage extends JFrame {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel_3_1_2.setLayout(gl_panel_3_1_2);
+		
+		JPanel panel_3_1_1_1 = new JPanel();
+		panel_3_1_1_1.setBackground(new Color(218, 163, 181));
+		
+		JButton btnAddNewManager = new JButton("ADD NEW MANAGER");
+		btnAddNewManager.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnAddNewManager.setForeground(new Color(138, 55, 84));
+		btnAddNewManager.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
+		GroupLayout gl_panel_3_1_1_1 = new GroupLayout(panel_3_1_1_1);
+		gl_panel_3_1_1_1.setHorizontalGroup(
+			gl_panel_3_1_1_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3_1_1_1.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnAddNewManager, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panel_3_1_1_1.setVerticalGroup(
+			gl_panel_3_1_1_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3_1_1_1.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnAddNewManager)
+					.addContainerGap(35, Short.MAX_VALUE))
+		);
+		panel_3_1_1_1.setLayout(gl_panel_3_1_1_1);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(19)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_3_1_1_1, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel_3_1_2, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel_3_1, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel_3_1_1, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE))
@@ -288,7 +289,9 @@ public class MyReservationPage extends JFrame {
 					.addComponent(panel_3_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_3_1_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(383, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panel_3_1_1_1, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(310, Short.MAX_VALUE))
 		);
 		
 		JButton btnPayment = new JButton("PAYMENT");
@@ -373,4 +376,5 @@ public class MyReservationPage extends JFrame {
 			}
 		});
 	}
+
 }

@@ -19,13 +19,15 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+import javax.swing.JPasswordField;
 
 public class SignUp extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField textField_3;
+	private JPasswordField passwordField;
+	private JPasswordField passwordField_1;
 
 	/**
 	 * Launch the application.
@@ -92,10 +94,6 @@ public class SignUp extends JFrame {
 		lblNewLabel_1_1.setForeground(new Color(138, 55, 84));
 		lblNewLabel_1_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-		textField_1.setColumns(10);
-		
 		JLabel lblNewLabel_2 = new JLabel("Please create password with: Uppercase, LowerCase, Numbers, and Symbols");
 		lblNewLabel_2.setForeground(new Color(138, 55, 84));
 		lblNewLabel_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 11));
@@ -103,10 +101,6 @@ public class SignUp extends JFrame {
 		JLabel lblNewLabel_1_1_1 = new JLabel("Re-type password");
 		lblNewLabel_1_1_1.setForeground(new Color(138, 55, 84));
 		lblNewLabel_1_1_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-		textField_2.setColumns(10);
 		
 		JLabel lblNewLabel_1_1_1_1 = new JLabel("Categories");
 		lblNewLabel_1_1_1_1.setForeground(new Color(138, 55, 84));
@@ -118,62 +112,80 @@ public class SignUp extends JFrame {
 		btnNewButton.setBackground(new Color(138, 55, 84));
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setFont(new Font("Trebuchet MS", Font.PLAIN, 18));
+		
+		textField_3 = new JTextField();
+		textField_3.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+		textField_3.setColumns(10);
+		
+		JLabel lblNewLabel_1_1_1_2 = new JLabel("Full Name:");
+		lblNewLabel_1_1_1_2.setForeground(new Color(138, 55, 84));
+		lblNewLabel_1_1_1_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+		
+		passwordField = new JPasswordField();
+		passwordField.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
+		
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-					.addGap(81)
-					.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
-					.addGap(56))
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(61)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
+							.addGap(61)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGap(20)
+									.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE))
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textField, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+										.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
+										.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE)
+										.addComponent(passwordField_1, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE))
+									.addGap(347))
+								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 423, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_1_1_1_2, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_1_1_1_1, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-								.addComponent(scrollPane, Alignment.LEADING)
-								.addGroup(Alignment.LEADING, gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(lblNewLabel_1_1_1_1, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
-									.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
-									.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
-									.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
-									.addComponent(textField, GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
-									.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
-									.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)))
-							.addGap(347))))
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(187)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(484, Short.MAX_VALUE))
+							.addGap(184)
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(63)
+					.addContainerGap()
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblNewLabel_1)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
 					.addGap(30)
 					.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(lblNewLabel_2)
 					.addGap(31)
 					.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-					.addGap(32)
+					.addComponent(passwordField_1, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+					.addGap(29)
+					.addComponent(lblNewLabel_1_1_1_2, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+					.addGap(34)
 					.addComponent(lblNewLabel_1_1_1_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
-					.addGap(30)
+					.addGap(39)
 					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-					.addGap(62))
+					.addGap(37))
 		);
 		
 		JList list = new JList();

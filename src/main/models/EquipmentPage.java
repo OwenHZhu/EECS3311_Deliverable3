@@ -16,19 +16,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel;
-import javax.swing.JScrollPane;
 
-public class MyReservationPage extends JFrame {
+public class EquipmentPage extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -37,7 +36,7 @@ public class MyReservationPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MyReservationPage frame = new MyReservationPage();
+					EquipmentPage frame = new EquipmentPage();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +48,7 @@ public class MyReservationPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MyReservationPage() {
+	public EquipmentPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1366, 839);
 		contentPane = new JPanel();
@@ -85,7 +84,7 @@ public class MyReservationPage extends JFrame {
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 553, GroupLayout.PREFERRED_SIZE))
 		);
 		
-		JLabel lblNewLabel = new JLabel("MY RESERVATION");
+		JLabel lblNewLabel = new JLabel("LAB EQUIPMENT");
 		lblNewLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 44));
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		
@@ -147,80 +146,47 @@ public class MyReservationPage extends JFrame {
 					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-					.addGap(41))
+					.addContainerGap())
 		);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		JLabel lblNewLabel_2 = new JLabel("Discription:");
+		lblNewLabel_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
 		
-		JLabel lblNewLabel_2 = new JLabel("Want to make changes? Choose the reservation and click here!");
-		lblNewLabel_2.setForeground(new Color(146, 54, 72));
-		lblNewLabel_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+		JLabel lblNewLabel_2_1 = new JLabel("Equipment ID:");
+		lblNewLabel_2_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
 		
-		JButton btnNewButton_1 = new JButton("Make Changes");
-		btnNewButton_1.addActionListener(e -> {
-			int selectedRow = table.getSelectedRow();
-
-		    if (selectedRow == -1) {
-		    	  ReservationNotChosenError dialog = new ReservationNotChosenError();
-		    	  dialog.setLocationRelativeTo(this);
-		          dialog.setVisible(true);
-		          return;
-		    }
-
-			
-		});
-				
-		btnNewButton_1.setForeground(new Color(146, 54, 72));
-		btnNewButton_1.setBackground(new Color(218, 163, 181));
-		btnNewButton_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		JLabel lblNewLabel_2_1_1 = new JLabel("Status:");
+		lblNewLabel_2_1_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
+		
+		JLabel lblNewLabel_2_1_1_1 = new JLabel("Location:");
+		lblNewLabel_2_1_1_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
-					.addContainerGap()
+					.addGap(30)
 					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
-						.addGroup(gl_panel_3.createSequentialGroup()
-							.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 615, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
+						.addComponent(lblNewLabel_2_1_1_1, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(635, Short.MAX_VALUE))
 		);
 		gl_panel_3.setVerticalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+					.addGap(25)
+					.addComponent(lblNewLabel_2)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_2)
-						.addComponent(btnNewButton_1))
-					.addGap(20))
+					.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblNewLabel_2_1_1_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(117, Short.MAX_VALUE))
 		);
 		
-		table = new JTable();
-		table.setShowVerticalLines(false);
-		scrollPane.setViewportView(table);
-		table.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
-		table.setForeground(new Color(0, 0, 0));
-		table.setToolTipText("");
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Reservation ID", "Equipment Item", "User ID", "Start Time", "End Time", "Status"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, Integer.class, Object.class, Object.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		table.getColumnModel().getColumn(0).setPreferredWidth(84);
-		table.getColumnModel().getColumn(1).setPreferredWidth(90);
+		
 		panel_3.setLayout(gl_panel_3);
 		panel_2.setLayout(gl_panel_2);
 		
