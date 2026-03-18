@@ -120,7 +120,7 @@ public class PaymentPage extends JFrame {
 		panel_1.setLayout(gl_panel_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\buiph\\git\\EECS3311_Deliverable2\\src\\main\\Pics\\UB_Logos_26.png"));
+		lblNewLabel_1.setIcon(new ImageIcon(getClass().getResource("/main/Pics/UB_Logos_26.png")));
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(new Color(239, 239, 239));

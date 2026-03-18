@@ -187,7 +187,7 @@ public class Login extends JFrame {
 		lblNewLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 44));
 		
 		lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\buiph\\git\\EECS3311_Deliverable2\\src\\main\\Pics\\UB_Logos_26.png"));
+		lblNewLabel_4.setIcon(new ImageIcon(getClass().getResource("/main/Pics/UB_Logos_26.png")));
 		
 		lblNewLabel_5 = new JLabel("Lab Equipment Service");
 		lblNewLabel_5.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));

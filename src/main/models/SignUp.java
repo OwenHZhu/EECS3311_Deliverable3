@@ -206,7 +206,7 @@ public class SignUp extends JFrame {
 		panel_1.setLayout(gl_panel_1);
 		
 		JLabel lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\buiph\\git\\EECS3311_Deliverable2\\src\\main\\Pics\\UB_Logos_26.png"));
+		lblNewLabel_3.setIcon(new ImageIcon(getClass().getResource("/main/Pics/UB_Logos_26.png")));
 		
 		JLabel lblNewLabel_4 = new JLabel("Lab Equipment Service");
 		lblNewLabel_4.setForeground(new Color(239, 239, 239));
