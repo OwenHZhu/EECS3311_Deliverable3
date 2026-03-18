@@ -83,6 +83,21 @@ public class AccountPage extends JFrame {
 		JLabel lblNewLabel = new JLabel("ACCOUNT");
 		lblNewLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 44));
 		lblNewLabel.setForeground(new Color(255, 255, 255));
+		
+		JButton btnNewButton_1 = new JButton("<- Find more lab equipment item");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainPage MainPage = new MainPage();
+				MainPage.setVisible(true);
+				MainPage.pack();
+				MainPage.setLocationRelativeTo(null);
+				setVisible(false);
+			}
+		});
+		btnNewButton_1.setForeground(new Color(146, 54, 72));
+		btnNewButton_1.setBackground(new Color(239, 239, 239));
+		btnNewButton_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		btnNewButton_1.setHorizontalAlignment(SwingConstants.LEFT);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -90,11 +105,13 @@ public class AccountPage extends JFrame {
 					.addGap(43)
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(662, Short.MAX_VALUE))
+				.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 930, Short.MAX_VALUE)
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(54)
+					.addComponent(btnNewButton_1)
+					.addGap(31)
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(58, Short.MAX_VALUE))
 		);
@@ -103,53 +120,85 @@ public class AccountPage extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\buiph\\git\\EECS3311_Deliverable2\\src\\main\\Pics\\UB_Logos_26.png"));
 		
-		JLabel lblNewLabel_2 = new JLabel("Name: ");
-		lblNewLabel_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
-		
-		JLabel lblNewLabel_2_1 = new JLabel("Status:");
-		lblNewLabel_2_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
-		
-		JLabel lblNewLabel_2_1_1 = new JLabel("User ID:");
-		lblNewLabel_2_1_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
-		
 		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(239, 239, 239));
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 518, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(401, Short.MAX_VALUE))
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addGap(38)
 					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_2.createSequentialGroup()
-							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-							.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 621, GroupLayout.PREFERRED_SIZE)
-							.addGap(50))
+							.addContainerGap()
+							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 518, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel_2.createSequentialGroup()
-							.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(758, Short.MAX_VALUE))))
+							.addGap(27)
+							.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 853, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(49, Short.MAX_VALUE))
 		);
 		gl_panel_2.setVerticalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
+			gl_panel_2.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_2.createSequentialGroup()
 					.addGap(48)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addComponent(lblNewLabel_2)
-							.addGap(16)
-							.addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
+					.addGap(46)
 					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
+		
+		JLabel lblNewLabel_2 = new JLabel("Name: ");
+		lblNewLabel_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
+		
+		JLabel lblNewLabel_2_1_1 = new JLabel("User ID:");
+		lblNewLabel_2_1_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
+		
+		JLabel lblNewLabel_2_1 = new JLabel("Status:");
+		lblNewLabel_2_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
+		
+		JLabel lblNewLabel_2_1_2 = new JLabel("Email: ");
+		lblNewLabel_2_1_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
+		
+		JLabel lblNewLabel_2_1_2_1 = new JLabel("Department:");
+		lblNewLabel_2_1_2_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
+		
+		JButton btnNewButton = new JButton("Edit");
+		btnNewButton.setForeground(new Color(146, 54, 72));
+		btnNewButton.setBackground(new Color(218, 163, 181));
+		btnNewButton.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
+		gl_panel_3.setHorizontalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3.createSequentialGroup()
+					.addGap(22)
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel_2_1_2, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_2_1_2_1, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(683, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
+					.addContainerGap(734, Short.MAX_VALUE)
+					.addComponent(btnNewButton)
+					.addGap(30))
+		);
+		gl_panel_3.setVerticalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3.createSequentialGroup()
+					.addGap(22)
+					.addComponent(lblNewLabel_2)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblNewLabel_2_1_1)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblNewLabel_2_1)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblNewLabel_2_1_2, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblNewLabel_2_1_2_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+					.addGap(27)
+					.addComponent(btnNewButton)
+					.addContainerGap(26, Short.MAX_VALUE))
+		);
+		panel_3.setLayout(gl_panel_3);
 		panel_2.setLayout(gl_panel_2);
 		
 		JPanel panel_3_1 = new JPanel();
@@ -158,12 +207,50 @@ public class AccountPage extends JFrame {
 		
 		JPanel panel_3_1_1 = new JPanel();
 		panel_3_1_1.setBackground(new Color(218, 163, 181));
+		
+		JPanel panel_3_1_2 = new JPanel();
+		panel_3_1_2.setForeground(Color.WHITE);
+		panel_3_1_2.setBackground(new Color(218, 163, 181));
+		
+		JButton btnAccount = new JButton("ACCOUNT");
+		btnAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					AccountPage AccountFrame = new AccountPage();
+					AccountFrame.setVisible(true);
+					AccountFrame.pack();
+					AccountFrame.setLocationRelativeTo(null);
+					setVisible(false);
+				
+			}
+		});
+		btnAccount.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnAccount.setForeground(new Color(138, 55, 84));
+		btnAccount.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
+		GroupLayout gl_panel_3_1_2 = new GroupLayout(panel_3_1_2);
+		gl_panel_3_1_2.setHorizontalGroup(
+			gl_panel_3_1_2.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 291, Short.MAX_VALUE)
+				.addGroup(gl_panel_3_1_2.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnAccount, GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panel_3_1_2.setVerticalGroup(
+			gl_panel_3_1_2.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 83, Short.MAX_VALUE)
+				.addGroup(gl_panel_3_1_2.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panel_3_1_2.setLayout(gl_panel_3_1_2);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(19)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_3_1_2, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel_3_1, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel_3_1_1, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(33, Short.MAX_VALUE))
@@ -171,7 +258,9 @@ public class AccountPage extends JFrame {
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(215)
+					.addGap(126)
+					.addComponent(panel_3_1_2, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_3_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_3_1_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
@@ -179,6 +268,16 @@ public class AccountPage extends JFrame {
 		);
 		
 		JButton btnPayment = new JButton("PAYMENT");
+		btnPayment.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PaymentPage PaymentFrame = new PaymentPage();
+				PaymentFrame.setVisible(true);
+				PaymentFrame.pack();
+				PaymentFrame.setLocationRelativeTo(null);
+				setVisible(false);
+			
+		}
+		});
 		btnPayment.setForeground(new Color(138, 55, 84));
 		btnPayment.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnPayment.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
@@ -200,6 +299,17 @@ public class AccountPage extends JFrame {
 		panel_3_1_1.setLayout(gl_panel_3_1_1);
 		
 		JButton btnMyReservation = new JButton("MY RESERVATION");
+		btnMyReservation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MyReservationPage ReservationFrame = new MyReservationPage();
+				ReservationFrame.setVisible(true);
+				ReservationFrame.pack();
+				ReservationFrame.setLocationRelativeTo(null);
+				setVisible(false);
+			
+		}
+			
+		});
 		btnMyReservation.setForeground(new Color(138, 55, 84));
 		btnMyReservation.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnMyReservation.setFont(new Font("Trebuchet MS", Font.BOLD, 24));

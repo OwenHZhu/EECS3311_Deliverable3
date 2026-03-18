@@ -195,6 +195,16 @@ public class MainPage extends JFrame {
 		panel_3.setLayout(gl_panel_3);
 		
 		JButton btnPayment = new JButton("PAYMENT");
+		btnPayment.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PaymentPage PaymentFrame = new PaymentPage();
+				PaymentFrame.setVisible(true);
+				PaymentFrame.pack();
+				PaymentFrame.setLocationRelativeTo(null);
+				setVisible(false);
+			
+		}
+		});
 		btnPayment.setForeground(new Color(138, 55, 84));
 		btnPayment.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnPayment.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
@@ -216,6 +226,15 @@ public class MainPage extends JFrame {
 		panel_3_1_1.setLayout(gl_panel_3_1_1);
 		
 		JButton btnMyReservation = new JButton("MY RESERVATION");
+		btnMyReservation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MyReservationPage ReservationFrame = new MyReservationPage();
+				ReservationFrame.setVisible(true);
+				ReservationFrame.pack();
+				ReservationFrame.setLocationRelativeTo(null);
+				setVisible(false);
+		}
+		});
 		btnMyReservation.setForeground(new Color(138, 55, 84));
 		btnMyReservation.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnMyReservation.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
