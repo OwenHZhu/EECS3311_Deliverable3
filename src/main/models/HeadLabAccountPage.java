@@ -118,7 +118,7 @@ public class HeadLabAccountPage extends JFrame {
 		panel_1.setLayout(gl_panel_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon(getClass().getResource("/main/Pics/UB_Logos_26.png")));
+		lblNewLabel_1.setIcon(IconUtil.loadIcon("src/main/Pics/York-University-Logo.png"));
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(new Color(239, 239, 239));
@@ -249,6 +249,11 @@ public class HeadLabAccountPage extends JFrame {
 		panel_3_1_1_1.setBackground(new Color(218, 163, 181));
 		
 		JButton btnAddNewManager = new JButton("ADD NEW MANAGER");
+		btnAddNewManager.addActionListener(e -> {
+			AddLabManagerDialog dialog = new AddLabManagerDialog(this);
+			dialog.setLocationRelativeTo(this);
+			dialog.setVisible(true);
+		});
 		btnAddNewManager.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnAddNewManager.setForeground(new Color(138, 55, 84));
 		btnAddNewManager.setFont(new Font("Trebuchet MS", Font.BOLD, 24));

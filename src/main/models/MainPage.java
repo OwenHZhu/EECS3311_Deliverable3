@@ -27,14 +27,18 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import java.util.List;
 
 public class MainPage extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private final ReservationFacade facade = AppBackend.getInstance().getFacade();
+	private final UserSession session = AppBackend.getInstance().getSession();
 
 	/**
 	 * Launch the application.
@@ -94,7 +98,7 @@ public class MainPage extends JFrame {
 		);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon(getClass().getResource("/main/Pics/UB_Logos_26.png")));
+		lblNewLabel_1.setIcon(IconUtil.loadIcon("src/main/Pics/York-University-Logo.png"));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -142,7 +146,21 @@ public class MainPage extends JFrame {
 		          return;
 		    }
 
-			
+			String equipmentId = String.valueOf(table.getValueAt(selectedRow, 0));
+			String userId = session.getCurrentUserId();
+			if (userId == null) {
+				JOptionPane.showMessageDialog(this, "Please login first.");
+				return;
+			}
+			MakeReservationDialog dialog = new MakeReservationDialog(
+					this,
+					facade,
+					userId,
+					equipmentId,
+					this::refreshEquipmentTable
+			);
+			dialog.setLocationRelativeTo(this);
+			dialog.setVisible(true);
 		});
 		btnNewButton_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
 		btnNewButton_1.setBackground(new Color(218, 163, 181));
@@ -187,6 +205,7 @@ public class MainPage extends JFrame {
 		table.setShowVerticalLines(false);
 		table.setFont(new Font("Trebuchet MS", Font.PLAIN, 18));
 		scrollPane.setViewportView(table);
+		refreshEquipmentTable();
 		panel_4.setLayout(gl_panel_4);
 		panel_2.setLayout(gl_panel_2);
 		
@@ -326,6 +345,17 @@ public class MainPage extends JFrame {
 		panel_3_1.setLayout(gl_panel_3_1);
 		panel.setLayout(gl_panel);
 		contentPane.setLayout(gl_contentPane);
+	}
+	private void refreshEquipmentTable() {
+		if (table == null) {
+			return;
+		}
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		model.setRowCount(0);
+		List<Equipment> equipment = facade.listEquipment();
+		for (Equipment e : equipment) {
+			model.addRow(new Object[] { e.getEquipmentId(), e.getDescription(), e.getLocation(), e.getStatus().toString() });
+		}
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {

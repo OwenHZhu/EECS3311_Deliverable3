@@ -14,6 +14,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.JOptionPane;
 import java.awt.GridLayout;
 import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
@@ -93,7 +94,7 @@ public class Login extends JFrame {
 		txtLogin.setColumns(10);
 		
 		lblNewLabel_1 = new JLabel("Login");
-		lblNewLabel_1.setForeground(new Color(138, 55, 84));
+		lblNewLabel_1.setForeground(new Color(0, 0, 0));
 		lblNewLabel_1.setFont(new Font("Trebuchet MS", Font.BOLD, 44));
 		
 		lblNewLabel_2 = new JLabel("Email or Username");
@@ -125,6 +126,32 @@ public class Login extends JFrame {
 		btnLogin.setBackground(new Color(138, 55, 84));
 		btnLogin.setForeground(new Color(255, 255, 255));
 		btnLogin.setFont(new Font("Trebuchet MS", Font.PLAIN, 18));
+		btnLogin.setOpaque(true);
+		btnLogin.setBorderPainted(false);
+		btnLogin.setContentAreaFilled(true);
+		btnLogin.setFocusPainted(false);
+		btnLogin.addActionListener(e -> {
+			String userOrEmail = txtLogin.getText() == null ? "" : txtLogin.getText().trim();
+			String password = new String(passwordField.getPassword());
+			User user = AppBackend.getInstance().getFacade().loginUser(userOrEmail, password);
+			if (user == null) {
+				JOptionPane.showMessageDialog(this, "Login failed. Account may not be approved yet, or credentials are wrong.");
+				return;
+			}
+			AppBackend.getInstance().getSession().setCurrentUser(user);
+			JFrame next;
+			if (user instanceof HeadLabCoordinator) {
+				next = new HeadLabAccountPage();
+			} else if (user instanceof LabManagerUser) {
+				next = new LabManagerAccountPage();
+			} else {
+				next = new MainPage();
+			}
+			next.setVisible(true);
+			next.pack();
+			next.setLocationRelativeTo(null);
+			dispose();
+		});
 		
 		passwordField = new JPasswordField();
 		passwordField.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
@@ -186,8 +213,8 @@ public class Login extends JFrame {
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 44));
 		
-		lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setIcon(new ImageIcon(getClass().getResource("/main/Pics/UB_Logos_26.png")));
+		lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setIcon(IconUtil.loadIcon("main/Pics/York-University-Logo.png"));
 		
 		lblNewLabel_5 = new JLabel("Lab Equipment Service");
 		lblNewLabel_5.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));

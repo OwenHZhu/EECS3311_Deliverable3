@@ -1,26 +1,26 @@
 package main.models;
 
-import main.enums.*;
+import main.enums.ApprovalStatus;
 
 public class ApprovalRequest {
     private String requestId;
-    private AccountStatus status;
+    private ApprovalStatus status;
 
-    public ApprovalRequest(String requestId, AccountStatus status) {
+    public ApprovalRequest(String requestId, ApprovalStatus status) {
         this.requestId = requestId;
         this.status = status;
     }
 
     public void submit() {
-        this.status = AccountStatus.PendingApproval;
+        this.status = ApprovalStatus.Pending;
     }
 
     public void approve() {
-        this.status = AccountStatus.Active;
+        this.status = ApprovalStatus.Active;
     }
 
     public void reject() {
-        this.status = AccountStatus.Suspended;
+        this.status = ApprovalStatus.Rejected;
     }
 
     // Getters and Setters
@@ -32,11 +32,11 @@ public class ApprovalRequest {
         this.requestId = requestId;
     }
 
-    public AccountStatus getStatus() {
+    public ApprovalStatus getStatus() {
         return status;
     }
 
-    public void setStatus(AccountStatus status) {
+    public void setStatus(ApprovalStatus status) {
         this.status = status;
     }
 }

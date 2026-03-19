@@ -23,11 +23,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 
 public class EquipmentManagementPage extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private final ReservationFacade facade = AppBackend.getInstance().getFacade();
+	private final UserSession session = AppBackend.getInstance().getSession();
 
 	/**
 	 * Launch the application.
@@ -117,7 +120,7 @@ public class EquipmentManagementPage extends JFrame {
 		panel_1.setLayout(gl_panel_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon(getClass().getResource("/main/Pics/UB_Logos_26.png")));
+		lblNewLabel_1.setIcon(IconUtil.loadIcon("src/main/Pics/York-University-Logo.png"));
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(new Color(239, 239, 239));
@@ -156,6 +159,12 @@ public class EquipmentManagementPage extends JFrame {
 		          dialog.setVisible(true);
 		          return;
 		    }
+			String equipmentId = String.valueOf(table.getValueAt(selectedRow, 0));
+			boolean ok = facade.enableEquipment(equipmentId);
+			if (!ok) {
+				JOptionPane.showMessageDialog(this, "Only lab managers can manage equipment (or you're not logged in correctly).");
+			}
+			refreshEquipmentTable();
 		});
 		btnNewButton_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
 		btnNewButton_1.setBackground(new Color(218, 163, 181));
@@ -171,6 +180,12 @@ public class EquipmentManagementPage extends JFrame {
 		          dialog.setVisible(true);
 		          return;
 		    }
+			String equipmentId = String.valueOf(table.getValueAt(selectedRow, 0));
+			boolean ok = facade.disableEquipment(equipmentId);
+			if (!ok) {
+				JOptionPane.showMessageDialog(this, "Only lab managers can manage equipment (or you're not logged in correctly).");
+			}
+			refreshEquipmentTable();
 		});
 		btnNewButton_1_1.setForeground(new Color(146, 54, 72));
 		btnNewButton_1_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -186,6 +201,12 @@ public class EquipmentManagementPage extends JFrame {
 		          dialog.setVisible(true);
 		          return;
 		    }
+			String equipmentId = String.valueOf(table.getValueAt(selectedRow, 0));
+			boolean ok = facade.markEquipmentUnderMaintenance(equipmentId);
+			if (!ok) {
+				JOptionPane.showMessageDialog(this, "Only lab managers can manage equipment (or you're not logged in correctly).");
+			}
+			refreshEquipmentTable();
 		});
 		btnNewButton_1_2.setForeground(new Color(146, 54, 72));
 		btnNewButton_1_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -237,6 +258,7 @@ public class EquipmentManagementPage extends JFrame {
 		});
 		table.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
 		scrollPane.setViewportView(table);
+		refreshEquipmentTable();
 		
 		JButton btnNewButton_2 = new JButton("Add +");
 		btnNewButton_2.setBackground(new Color(218, 163, 181));
@@ -249,6 +271,18 @@ public class EquipmentManagementPage extends JFrame {
 		panel_2.setLayout(gl_panel_2);
 		contentPane.setLayout(gl_contentPane);
 	}
+
+	private void refreshEquipmentTable() {
+		if (table == null) {
+			return;
+		}
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		model.setRowCount(0);
+		for (Equipment e : facade.listEquipment()) {
+			model.addRow(new Object[] { e.getEquipmentId(), e.getDescription(), e.getLocation(), e.getStatus().toString() });
+		}
+	}
+
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {

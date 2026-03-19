@@ -24,11 +24,15 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.JScrollPane;
+import javax.swing.JOptionPane;
+import java.util.List;
 
 public class MyReservationPage extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private final ReservationFacade facade = AppBackend.getInstance().getFacade();
+	private final UserSession session = AppBackend.getInstance().getSession();
 
 	/**
 	 * Launch the application.
@@ -123,7 +127,7 @@ public class MyReservationPage extends JFrame {
 		panel_1.setLayout(gl_panel_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon(getClass().getResource("/main/Pics/UB_Logos_26.png")));
+		lblNewLabel_1.setIcon(IconUtil.loadIcon("src/main/Pics/York-University-Logo.png"));
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(new Color(239, 239, 239));
@@ -167,7 +171,10 @@ public class MyReservationPage extends JFrame {
 		          return;
 		    }
 
-			
+			String reservationId = String.valueOf(table.getValueAt(selectedRow, 0));
+			ReservationEditDialog dialog = new ReservationEditDialog(this, facade, reservationId, this::refreshReservations);
+			dialog.setLocationRelativeTo(this);
+			dialog.setVisible(true);
 		});
 				
 		btnNewButton_1.setForeground(new Color(146, 54, 72));
@@ -213,12 +220,13 @@ public class MyReservationPage extends JFrame {
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, Integer.class, Object.class, Object.class, String.class
+				String.class, String.class, String.class, Object.class, Object.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 		});
+		refreshReservations();
 		table.getColumnModel().getColumn(0).setPreferredWidth(84);
 		table.getColumnModel().getColumn(1).setPreferredWidth(90);
 		panel_3.setLayout(gl_panel_3);
@@ -355,6 +363,33 @@ public class MyReservationPage extends JFrame {
 		panel_3_1.setLayout(gl_panel_3_1);
 		panel.setLayout(gl_panel);
 		contentPane.setLayout(gl_contentPane);
+	}
+
+	private void refreshReservations() {
+		if (table == null) {
+			return;
+		}
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		model.setRowCount(0);
+
+		String userId = session.getCurrentUserId();
+		if (userId == null) {
+			return;
+		}
+
+		List<Reservation> rs = facade.listReservationsByUserId(userId);
+		for (Reservation r : rs) {
+			String equipmentItem = r.getEquipment() == null ? "" : r.getEquipment().getEquipmentId();
+			String uid = r.getUser() == null ? "" : r.getUser().getUserId();
+			model.addRow(new Object[] {
+					r.getReservationId(),
+					equipmentItem,
+					uid,
+					r.getStartTime(),
+					r.getEndTime(),
+					r.getStatus().toString()
+			});
+		}
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {

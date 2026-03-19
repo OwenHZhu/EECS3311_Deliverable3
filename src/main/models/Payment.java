@@ -1,20 +1,28 @@
 package main.models;
 
-import main.enums.*;
+import main.enums.PaymentMethod;
 
 public class Payment {
     private String paymentId;
     private double amount;
+    private PaymentStrategy strategy;
     private PaymentMethod method;
 
     public Payment(String paymentId, double amount, PaymentMethod method) {
         this.paymentId = paymentId;
         this.amount = amount;
-        this.method = method;
+        setMethod(method);
+    }
+
+    public void setStrategy(PaymentStrategy strategy) {
+        this.strategy = strategy;
     }
 
     public boolean processPayment() {
-        return amount >= 0.0;
+        if (strategy == null) {
+            throw new IllegalStateException("Payment strategy not set.");
+        }
+        return strategy.process(amount);
     }
 
     public boolean refund(double refundAmount) {
@@ -48,5 +56,6 @@ public class Payment {
 
     public void setMethod(PaymentMethod method) {
         this.method = method;
+        this.strategy = PaymentStrategyFactory.fromMethod(method);
     }
 }
