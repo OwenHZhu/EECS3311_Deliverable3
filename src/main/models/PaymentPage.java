@@ -130,7 +130,7 @@ public class PaymentPage extends JFrame {
 					.addContainerGap())
 		);
 		
-		JLabel lblNewLabel_2 = new JLabel("Payment method:");
+		JLabel lblNewLabel_2 = new JLabel("Payment method: " + currentUser.getPayments());
 		lblNewLabel_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
 		
 		JButton btnNewButton_1 = new JButton("Edit");
@@ -139,22 +139,23 @@ public class PaymentPage extends JFrame {
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
+			gl_panel_3.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_3.createSequentialGroup()
-					.addGap(35)
-					.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 236, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(531, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
-					.addContainerGap(707, Short.MAX_VALUE)
-					.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.TRAILING)
+						.addGroup(Alignment.LEADING, gl_panel_3.createSequentialGroup()
+							.addGap(35)
+							.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, 757, Short.MAX_VALUE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addContainerGap(724, Short.MAX_VALUE)
+							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)))
 					.addGap(27))
 		);
 		gl_panel_3.setVerticalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_3.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
 					.addGap(34)
 					.addComponent(lblNewLabel_2)
-					.addPreferredGap(ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
 					.addComponent(btnNewButton_1)
 					.addContainerGap())
 		);

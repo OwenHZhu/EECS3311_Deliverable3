@@ -128,41 +128,50 @@ public class AccountPage extends JFrame {
 					.addContainerGap())
 		);
 		
-		JLabel lblNewLabel_2 = new JLabel("Name: ");
+		JLabel lblNewLabel_2 = new JLabel("Name: " + currentUser.getName());
 		lblNewLabel_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
 		
-		JLabel lblNewLabel_2_1_1 = new JLabel("User ID:");
+		JLabel lblNewLabel_2_1_1 = new JLabel("User ID: " + currentUser.getIdOrCertificationNumber());
 		lblNewLabel_2_1_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
 		
-		JLabel lblNewLabel_2_1 = new JLabel("Status:");
+		JLabel lblNewLabel_2_1 = new JLabel("Status: " + currentUser.getStatus());
 		lblNewLabel_2_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
 		
-		JLabel lblNewLabel_2_1_2 = new JLabel("Email: ");
+		JLabel lblNewLabel_2_1_2 = new JLabel("Email: " + currentUser.getEmail());
 		lblNewLabel_2_1_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
 		
-		JLabel lblNewLabel_2_1_2_1 = new JLabel("Department:");
+		JLabel lblNewLabel_2_1_2_1 = new JLabel("Department: " + currentUser.getDepartment());
 		lblNewLabel_2_1_2_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
 		
 		JButton btnNewButton = new JButton("Edit");
+		btnNewButton.addActionListener(e -> {
+			EditAccountDialog dialog = new EditAccountDialog(this, currentUser);
+			dialog.setLocationRelativeTo(this);
+			dialog.setVisible(true);
+		});
 		btnNewButton.setForeground(new Color(146, 54, 72));
 		btnNewButton.setBackground(new Color(218, 163, 181));
 		btnNewButton.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_3.createSequentialGroup()
+			gl_panel_3.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panel_3.createSequentialGroup()
 					.addGap(22)
 					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel_2_1_2, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_2_1_2_1, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(683, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
-					.addContainerGap(734, Short.MAX_VALUE)
-					.addComponent(btnNewButton)
-					.addGap(30))
+						.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
+							.addGroup(gl_panel_3.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblNewLabel_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+								.addGroup(gl_panel_3.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED, 744, Short.MAX_VALUE)
+									.addComponent(btnNewButton)))
+							.addGap(30))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNewLabel_2_1_1, GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+								.addComponent(lblNewLabel_2_1, GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+								.addComponent(lblNewLabel_2_1_2, GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+								.addComponent(lblNewLabel_2_1_2_1, GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE))
+							.addContainerGap(30, GroupLayout.PREFERRED_SIZE))))
 		);
 		gl_panel_3.setVerticalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
@@ -179,7 +188,7 @@ public class AccountPage extends JFrame {
 					.addComponent(lblNewLabel_2_1_2_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 					.addGap(27)
 					.addComponent(btnNewButton)
-					.addContainerGap(26, Short.MAX_VALUE))
+					.addContainerGap(22, Short.MAX_VALUE))
 		);
 		panel_3.setLayout(gl_panel_3);
 		panel_2.setLayout(gl_panel_2);
@@ -197,7 +206,12 @@ public class AccountPage extends JFrame {
 		
 		JButton btnAccount = new JButton("ACCOUNT");
 		btnAccount.addActionListener(e -> {
-			return;
+			AccountPage frame = new AccountPage(currentUser);
+			frame.setVisible(true);
+			frame.pack();
+			frame.setLocationRelativeTo(null);
+			setVisible(false);
+			
 		});
 		btnAccount.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnAccount.setForeground(new Color(138, 55, 84));
@@ -308,6 +322,9 @@ public class AccountPage extends JFrame {
 		panel.setLayout(gl_panel);
 		contentPane.setLayout(gl_contentPane);
 	}
+	
+	
+	
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
