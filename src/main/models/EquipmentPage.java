@@ -28,27 +28,11 @@ import javax.swing.table.DefaultTableModel;
 public class EquipmentPage extends JFrame {
 
 	private JPanel contentPane;
+	private User currentUser;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EquipmentPage frame = new EquipmentPage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public EquipmentPage() {
+	
+	public EquipmentPage(User currentUser) {
+		this.currentUser = currentUser;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1366, 839);
 		contentPane = new JPanel();
@@ -91,7 +75,7 @@ public class EquipmentPage extends JFrame {
 		JButton btnNewButton = new JButton("<- Find more lab equipment item");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainPage MainPage = new MainPage();
+				MainPage MainPage = new MainPage(currentUser);
 				MainPage.setVisible(true);
 				MainPage.pack();
 				MainPage.setLocationRelativeTo(null);
@@ -204,14 +188,20 @@ public class EquipmentPage extends JFrame {
 		
 		
 		JButton btnAccount = new JButton("ACCOUNT");
-		btnAccount.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				AccountPage AccountFrame = new AccountPage();
-				AccountFrame.setVisible(true);
-				AccountFrame.pack();
-				AccountFrame.setLocationRelativeTo(null);
-				setVisible(false);
-			}
+		btnAccount.addActionListener(e -> {
+			JFrame next;
+		    if (currentUser instanceof HeadLabCoordinator) {
+		       next = new HeadLabAccountPage(currentUser);
+		    } else if (currentUser instanceof LabManagerUser) {
+		       next = new LabManagerAccountPage(currentUser);
+		    } else {
+		       next = new AccountPage(currentUser);
+		    }
+		    next.setVisible(true);
+		    next.pack();
+		    next.setLocationRelativeTo(null);
+		    dispose();
+
 		});
 		btnAccount.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnAccount.setForeground(new Color(138, 55, 84));
@@ -260,7 +250,7 @@ public class EquipmentPage extends JFrame {
 		JButton btnPayment = new JButton("PAYMENT");
 		btnPayment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PaymentPage PaymentFrame = new PaymentPage();
+				PaymentPage PaymentFrame = new PaymentPage(currentUser);
 				PaymentFrame.setVisible(true);
 				PaymentFrame.pack();
 				PaymentFrame.setLocationRelativeTo(null);
@@ -289,17 +279,11 @@ public class EquipmentPage extends JFrame {
 		panel_3_1_1.setLayout(gl_panel_3_1_1);
 		
 		JButton btnMyReservation = new JButton("MY RESERVATION");
-		btnMyReservation.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				MyReservationPage ReservationFrame = new MyReservationPage();
-				ReservationFrame.setVisible(true);
-				ReservationFrame.pack();
-				ReservationFrame.setLocationRelativeTo(null);
-				setVisible(false);
-			
-		}
-			
-		});
+		btnMyReservation.addActionListener(e -> {
+			JFrame next;
+		    next = new MyReservationPage(currentUser);
+		    
+	});
 		btnMyReservation.setForeground(new Color(138, 55, 84));
 		btnMyReservation.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnMyReservation.setFont(new Font("Trebuchet MS", Font.BOLD, 24));

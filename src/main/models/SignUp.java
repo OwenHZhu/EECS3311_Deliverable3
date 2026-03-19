@@ -162,7 +162,7 @@ public class SignUp extends JFrame {
 				if (created.getStatus() == AccountStatus.Active) {
 					JOptionPane.showMessageDialog(this, "Account created and approved. You can login now.");
 					AppBackend.getInstance().getSession().setCurrentUser(created);
-					MainPage main = new MainPage();
+					MainPage main = new MainPage(created);
 					main.setVisible(true);
 					main.pack();
 					main.setLocationRelativeTo(null);

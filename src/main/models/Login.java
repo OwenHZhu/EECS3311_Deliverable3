@@ -141,11 +141,11 @@ public class Login extends JFrame {
 			AppBackend.getInstance().getSession().setCurrentUser(user);
 			JFrame next;
 			if (user instanceof HeadLabCoordinator) {
-				next = new HeadLabAccountPage();
+				next = new HeadLabAccountPage(user);
 			} else if (user instanceof LabManagerUser) {
-				next = new LabManagerAccountPage();
+				next = new LabManagerAccountPage(user);
 			} else {
-				next = new MainPage();
+				next = new MainPage(user);
 			}
 			next.setVisible(true);
 			next.pack();

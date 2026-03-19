@@ -39,29 +39,11 @@ public class MainPage extends JFrame {
 	private JTable table;
 	private final ReservationFacade facade = AppBackend.getInstance().getFacade();
 	private final UserSession session = AppBackend.getInstance().getSession();
+	private User currentUser;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainPage frame = new MainPage();
-					frame.setVisible(true);
-					frame.pack();
-					frame.setLocationRelativeTo(null);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public MainPage() {
+	
+	public MainPage(User currenUser) {
+		this.currentUser = currenUser;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1366, 839);
 		contentPane = new JPanel();
@@ -98,7 +80,7 @@ public class MainPage extends JFrame {
 		);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(IconUtil.loadIcon("src/main/Pics/York-University-Logo.png"));
+		lblNewLabel_1.setIcon(IconUtil.loadIcon("/main/Pics/UB_Logos_26.png"));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -253,15 +235,20 @@ public class MainPage extends JFrame {
 		);
 		
 		JButton btnNewButton = new JButton("ACCOUNT\r\n");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-					AccountPage AccountFrame = new AccountPage();
-					AccountFrame.setVisible(true);
-					AccountFrame.pack();
-					AccountFrame.setLocationRelativeTo(null);
-					setVisible(false);
-				
-			}
+		btnNewButton.addActionListener(e -> {
+			JFrame next;
+		    if (currentUser instanceof HeadLabCoordinator) {
+		       next = new HeadLabAccountPage(currentUser);
+		    } else if (currentUser instanceof LabManagerUser) {
+		       next = new LabManagerAccountPage(currentUser);
+		    } else {
+		       next = new AccountPage(currentUser);
+		    }
+		    next.setVisible(true);
+		    next.pack();
+		    next.setLocationRelativeTo(null);
+		    dispose();
+
 		});
 		btnNewButton.setForeground(new Color(138, 55, 84));
 		btnNewButton.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
@@ -286,7 +273,7 @@ public class MainPage extends JFrame {
 		JButton btnPayment = new JButton("PAYMENT");
 		btnPayment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PaymentPage PaymentFrame = new PaymentPage();
+				PaymentPage PaymentFrame = new PaymentPage(currentUser);
 				PaymentFrame.setVisible(true);
 				PaymentFrame.pack();
 				PaymentFrame.setLocationRelativeTo(null);
@@ -317,7 +304,7 @@ public class MainPage extends JFrame {
 		JButton btnMyReservation = new JButton("MY RESERVATION");
 		btnMyReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MyReservationPage ReservationFrame = new MyReservationPage();
+				MyReservationPage ReservationFrame = new MyReservationPage(currentUser);
 				ReservationFrame.setVisible(true);
 				ReservationFrame.pack();
 				ReservationFrame.setLocationRelativeTo(null);

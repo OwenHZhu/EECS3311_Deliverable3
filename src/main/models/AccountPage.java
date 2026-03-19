@@ -24,27 +24,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class AccountPage extends JFrame {
 
 	private JPanel contentPane;
+	private User currentUser;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AccountPage frame = new AccountPage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public AccountPage() {
+	public AccountPage(User currentUser) {
+		this.currentUser = currentUser;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1366, 839);
 		contentPane = new JPanel();
@@ -87,7 +70,7 @@ public class AccountPage extends JFrame {
 		JButton btnNewButton_1 = new JButton("<- Find more lab equipment item");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainPage MainPage = new MainPage();
+				MainPage MainPage = new MainPage(currentUser);
 				MainPage.setVisible(true);
 				MainPage.pack();
 				MainPage.setLocationRelativeTo(null);
@@ -213,15 +196,8 @@ public class AccountPage extends JFrame {
 		panel_3_1_2.setBackground(new Color(218, 163, 181));
 		
 		JButton btnAccount = new JButton("ACCOUNT");
-		btnAccount.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-					AccountPage AccountFrame = new AccountPage();
-					AccountFrame.setVisible(true);
-					AccountFrame.pack();
-					AccountFrame.setLocationRelativeTo(null);
-					setVisible(false);
-				
-			}
+		btnAccount.addActionListener(e -> {
+			return;
 		});
 		btnAccount.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnAccount.setForeground(new Color(138, 55, 84));
@@ -270,7 +246,7 @@ public class AccountPage extends JFrame {
 		JButton btnPayment = new JButton("PAYMENT");
 		btnPayment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PaymentPage PaymentFrame = new PaymentPage();
+				PaymentPage PaymentFrame = new PaymentPage(currentUser);
 				PaymentFrame.setVisible(true);
 				PaymentFrame.pack();
 				PaymentFrame.setLocationRelativeTo(null);
@@ -301,7 +277,7 @@ public class AccountPage extends JFrame {
 		JButton btnMyReservation = new JButton("MY RESERVATION");
 		btnMyReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MyReservationPage ReservationFrame = new MyReservationPage();
+				MyReservationPage ReservationFrame = new MyReservationPage(currentUser);
 				ReservationFrame.setVisible(true);
 				ReservationFrame.pack();
 				ReservationFrame.setLocationRelativeTo(null);

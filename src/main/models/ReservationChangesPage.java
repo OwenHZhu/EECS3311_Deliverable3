@@ -28,27 +28,11 @@ import javax.swing.table.DefaultTableModel;
 public class ReservationChangesPage extends JFrame {
 
 	private JPanel contentPane;
+	private User currentUser;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ReservationChangesPage frame = new ReservationChangesPage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public ReservationChangesPage() {
+	
+	public ReservationChangesPage(User currentUser) {
+		this.currentUser = currentUser;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1366, 839);
 		contentPane = new JPanel();
@@ -86,7 +70,7 @@ public class ReservationChangesPage extends JFrame {
 		JButton btnNewButton = new JButton("<- Find more lab equipment item");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainPage MainPage = new MainPage();
+				MainPage MainPage = new MainPage(currentUser);
 				MainPage.setVisible(true);
 				MainPage.pack();
 				MainPage.setLocationRelativeTo(null);
