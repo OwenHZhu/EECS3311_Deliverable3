@@ -214,7 +214,7 @@ public class Login extends JFrame {
 		lblNewLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 44));
 		
 		lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(IconUtil.loadIcon("main/Pics/York-University-Logo.png"));
+		lblNewLabel_4.setIcon(IconUtil.loadIcon("/main/Pics/UB_Logos_26.png"));
 		
 		lblNewLabel_5 = new JLabel("Lab Equipment Service");
 		lblNewLabel_5.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -225,16 +225,18 @@ public class Login extends JFrame {
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(23)
-							.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 536, GroupLayout.PREFERRED_SIZE)
-							.addGap(165)
-							.addComponent(txtYorkuLabEquipment, GroupLayout.PREFERRED_SIZE, 405, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(127)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 339, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(176)
-							.addComponent(lblNewLabel_5, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(lblNewLabel_5, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(127)
+									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 339, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(23)
+									.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 531, GroupLayout.PREFERRED_SIZE)))
+							.addGap(170)
+							.addComponent(txtYorkuLabEquipment, GroupLayout.PREFERRED_SIZE, 405, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
@@ -243,8 +245,8 @@ public class Login extends JFrame {
 					.addGap(21)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addComponent(txtYorkuLabEquipment, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE))
-					.addGap(177)
+						.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE))
+					.addGap(161)
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 282, Short.MAX_VALUE)
 					.addComponent(lblNewLabel_5, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)

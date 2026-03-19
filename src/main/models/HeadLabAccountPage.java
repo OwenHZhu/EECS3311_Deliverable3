@@ -118,7 +118,7 @@ public class HeadLabAccountPage extends JFrame {
 		panel_1.setLayout(gl_panel_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(IconUtil.loadIcon("src/main/Pics/York-University-Logo.png"));
+		lblNewLabel_1.setIcon(IconUtil.loadIcon("/main/Pics/UB_Logos_26.png"));
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(new Color(239, 239, 239));

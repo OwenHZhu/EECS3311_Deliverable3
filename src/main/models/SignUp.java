@@ -293,7 +293,7 @@ public class SignUp extends JFrame {
 		panel_1.setLayout(gl_panel_1);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(IconUtil.loadIcon("src/main/Pics/York-University-Logo.png"));
+		lblNewLabel_3.setIcon(IconUtil.loadIcon("/main/Pics/UB_Logos_26.png"));
 		
 		JLabel lblNewLabel_4 = new JLabel("Lab Equipment Service");
 		lblNewLabel_4.setForeground(new Color(239, 239, 239));
