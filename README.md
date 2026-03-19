@@ -7,7 +7,7 @@
 From the project root:
 
 ```bash
-cd "/Users/jimmynguyen/Desktop/workbench/EECS3311_Deliverable2" \
+cd "EECS3311_Deliverable2" \
   && rm -rf out \
   && mkdir -p out \
   && javac -d out src/main/Main.java src/main/enums/*.java src/main/models/*.java \
