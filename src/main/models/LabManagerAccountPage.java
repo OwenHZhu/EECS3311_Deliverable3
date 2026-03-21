@@ -186,7 +186,7 @@ public class LabManagerAccountPage extends JFrame {
 		
 		JButton btnAccount = new JButton("ACCOUNT");
 		btnAccount.addActionListener(e -> {
-			return;
+			// already on account page
 		});
 		btnAccount.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnAccount.setForeground(new Color(138, 55, 84));
@@ -241,16 +241,52 @@ public class LabManagerAccountPage extends JFrame {
 					.addContainerGap(35, Short.MAX_VALUE))
 		);
 		panel_3_1_1_1.setLayout(gl_panel_3_1_1_1);
+
+		// --- SIGN OUT panel ---
+		JPanel panel_signout = new JPanel();
+		panel_signout.setBackground(new Color(218, 163, 181));
+
+		JButton btnSignOut = new JButton("SIGN OUT");
+		btnSignOut.addActionListener(e -> {
+			AppBackend.getInstance().getSession().setCurrentUser(null);
+			Login login = new Login();
+			login.setVisible(true);
+			login.pack();
+			login.setLocationRelativeTo(null);
+			dispose();
+		});
+		btnSignOut.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnSignOut.setForeground(new Color(138, 55, 84));
+		btnSignOut.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
+		GroupLayout gl_panel_signout = new GroupLayout(panel_signout);
+		gl_panel_signout.setHorizontalGroup(
+			gl_panel_signout.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_signout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnSignOut, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panel_signout.setVerticalGroup(
+			gl_panel_signout.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_signout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnSignOut)
+					.addContainerGap(35, Short.MAX_VALUE))
+		);
+		panel_signout.setLayout(gl_panel_signout);
+		// --- END SIGN OUT panel ---
+
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(19)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_3_1_1_1, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel_3_1_2, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel_3_1, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel_3_1_1, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE))
+						.addComponent(panel_3_1_1, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel_3_1_1_1, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel_signout, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(33, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
@@ -264,7 +300,9 @@ public class LabManagerAccountPage extends JFrame {
 					.addComponent(panel_3_1_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(panel_3_1_1_1, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(312, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panel_signout, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(250, Short.MAX_VALUE))
 		);
 		
 		JButton btnPayment = new JButton("PAYMENT");
@@ -275,8 +313,7 @@ public class LabManagerAccountPage extends JFrame {
 				PaymentFrame.pack();
 				PaymentFrame.setLocationRelativeTo(null);
 				setVisible(false);
-			
-		}
+			}
 		});
 		btnPayment.setForeground(new Color(138, 55, 84));
 		btnPayment.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -306,9 +343,7 @@ public class LabManagerAccountPage extends JFrame {
 				ReservationFrame.pack();
 				ReservationFrame.setLocationRelativeTo(null);
 				setVisible(false);
-			
-		}
-			
+			}
 		});
 		btnMyReservation.setForeground(new Color(138, 55, 84));
 		btnMyReservation.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -332,17 +367,14 @@ public class LabManagerAccountPage extends JFrame {
 		panel.setLayout(gl_panel);
 		contentPane.setLayout(gl_contentPane);
 	}
+
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
+				if (e.isPopupTrigger()) showMenu(e);
 			}
 			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
+				if (e.isPopupTrigger()) showMenu(e);
 			}
 			private void showMenu(MouseEvent e) {
 				popup.show(e.getComponent(), e.getX(), e.getY());

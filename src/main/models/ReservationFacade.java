@@ -66,6 +66,7 @@ public class ReservationFacade {
                     "EECS",
                     AccountStatus.Active
             );
+
             database.writeUsers(List.of(demo));
             seeded = true;
         }
@@ -88,6 +89,10 @@ public class ReservationFacade {
                 database.readReservations(),
                 database.readPayments()
         );
+    }
+    
+    public List<User> getAllUsers() {
+        return reservationSystem.getUsers();
     }
 
     public boolean reserveReservation(String userId, String equipmentId, String timeSlot, PaymentMethod method) {
@@ -148,6 +153,18 @@ public class ReservationFacade {
             return false;
         }
     }
+    
+    public String recordArrival(String reservationId, LocalDateTime arrivalTime) {
+        Objects.requireNonNull(reservationId, "reservationId cannot be null.");
+        Reservation r = findReservation(reservationId);
+        if (r == null) return "Reservation not found.";
+        reservationSystem.recordArrival(r, arrivalTime);
+        persistSnapshot();
+        if (r.getStatus() == ReservationStatus.NoShow) {
+            return "LATE ARRIVAL — deposit of $" + String.format("%.2f", r.getDepositAmount()) + " is forfeited.";
+        }
+        return "ON TIME — deposit of $" + String.format("%.2f", r.getDepositAmount()) + " will be deducted from total.";
+    }
 
     public boolean extendReservation(String reservationId, LocalDateTime newEndTime) {
         Objects.requireNonNull(reservationId, "reservationId cannot be null.");
@@ -164,7 +181,8 @@ public class ReservationFacade {
             return false;
         }
     }
-
+    
+    
     public boolean modifyReservation(String reservationId, LocalDateTime newStart, LocalDateTime newEnd, LocalDateTime now) {
         Objects.requireNonNull(reservationId, "reservationId cannot be null.");
         Objects.requireNonNull(newStart, "newStart cannot be null.");
@@ -247,11 +265,12 @@ public class ReservationFacade {
         }
     }
 
-    public boolean createLabManagerAccountFromHead(String name,
-                                                    String email,
-                                                    String password,
-                                                    String idOrCertificationNumber,
-                                                    String department) {
+    public boolean createLabManagerAccountFromHead(
+    		String name,
+            String email,
+            String password,
+            String idOrCertificationNumber,
+            String department) {
         User actor = getCurrentUser();
         if (!(actor instanceof HeadLabCoordinator)) {
             return false;
