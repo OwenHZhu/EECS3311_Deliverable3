@@ -5,7 +5,7 @@ import main.enums.*;
 public class HeadLabCoordinator extends User {
     private static HeadLabCoordinator instance;
 
-    private HeadLabCoordinator(String userId,
+    HeadLabCoordinator(String userId,
                                String name,
                                String email,
                                String password,

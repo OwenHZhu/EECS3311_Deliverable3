@@ -41,7 +41,6 @@ public class MainPage extends JFrame {
 	private final UserSession session = AppBackend.getInstance().getSession();
 	private User currentUser;
 
-	
 	public MainPage(User currenUser) {
 		this.currentUser = currenUser;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,14 +119,12 @@ public class MainPage extends JFrame {
 		JButton btnNewButton_1 = new JButton("Make Reservation");
 		btnNewButton_1.addActionListener(e -> {
 			int selectedRow = table.getSelectedRow();
-
-		    if (selectedRow == -1) {
-		    	  ReservationNotChosenError dialog = new ReservationNotChosenError();
-		    	  dialog.setLocationRelativeTo(this);
-		          dialog.setVisible(true);
-		          return;
-		    }
-
+			if (selectedRow == -1) {
+				ReservationNotChosenError dialog = new ReservationNotChosenError();
+				dialog.setLocationRelativeTo(this);
+				dialog.setVisible(true);
+				return;
+			}
 			String equipmentId = String.valueOf(table.getValueAt(selectedRow, 0));
 			String userId = session.getCurrentUserId();
 			if (userId == null) {
@@ -135,12 +132,7 @@ public class MainPage extends JFrame {
 				return;
 			}
 			MakeReservationDialog dialog = new MakeReservationDialog(
-					this,
-					facade,
-					userId,
-					equipmentId,
-					this::refreshEquipmentTable
-			);
+					this, facade, userId, equipmentId, this::refreshEquipmentTable);
 			dialog.setLocationRelativeTo(this);
 			dialog.setVisible(true);
 		});
@@ -178,11 +170,8 @@ public class MainPage extends JFrame {
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Equipment ID", "Description", "Location", "Status"
-			}
+			new Object[][] {},
+			new String[] { "Equipment ID", "Description", "Location", "Status" }
 		));
 		table.setShowVerticalLines(false);
 		table.setFont(new Font("Trebuchet MS", Font.PLAIN, 18));
@@ -204,6 +193,41 @@ public class MainPage extends JFrame {
 		
 		JPanel panel_3_1_1 = new JPanel();
 		panel_3_1_1.setBackground(new Color(218, 163, 181));
+
+		// --- SIGN OUT panel ---
+		JPanel panel_signout = new JPanel();
+		panel_signout.setBackground(new Color(218, 163, 181));
+
+		JButton btnSignOut = new JButton("SIGN OUT");
+		btnSignOut.addActionListener(e -> {
+			AppBackend.getInstance().getSession().setCurrentUser(null);
+			Login login = new Login();
+			login.setVisible(true);
+			login.pack();
+			login.setLocationRelativeTo(null);
+			dispose();
+		});
+		btnSignOut.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnSignOut.setForeground(new Color(138, 55, 84));
+		btnSignOut.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
+		GroupLayout gl_panel_signout = new GroupLayout(panel_signout);
+		gl_panel_signout.setHorizontalGroup(
+			gl_panel_signout.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_signout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnSignOut, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panel_signout.setVerticalGroup(
+			gl_panel_signout.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_signout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnSignOut)
+					.addContainerGap(35, Short.MAX_VALUE))
+		);
+		panel_signout.setLayout(gl_panel_signout);
+		// --- END SIGN OUT panel ---
+
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -214,7 +238,8 @@ public class MainPage extends JFrame {
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(panel_3_1, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
 								.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
-								.addComponent(panel_3_1_1, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(panel_3_1_1, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
+								.addComponent(panel_signout, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(59)
 							.addComponent(lblNewLabel)))
@@ -231,24 +256,25 @@ public class MainPage extends JFrame {
 					.addComponent(panel_3_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_3_1_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(383, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panel_signout, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(321, Short.MAX_VALUE))
 		);
 		
 		JButton btnNewButton = new JButton("ACCOUNT\r\n");
 		btnNewButton.addActionListener(e -> {
 			JFrame next;
-		    if (currentUser instanceof HeadLabCoordinator) {
-		       next = new HeadLabAccountPage(currentUser);
-		    } else if (currentUser instanceof LabManagerUser) {
-		       next = new LabManagerAccountPage(currentUser);
-		    } else {
-		       next = new AccountPage(currentUser);
-		    }
-		    next.setVisible(true);
-		    next.pack();
-		    next.setLocationRelativeTo(null);
-		    dispose();
-
+			if (currentUser instanceof HeadLabCoordinator) {
+				next = new HeadLabAccountPage(currentUser);
+			} else if (currentUser instanceof LabManagerUser) {
+				next = new LabManagerAccountPage(currentUser);
+			} else {
+				next = new AccountPage(currentUser);
+			}
+			next.setVisible(true);
+			next.pack();
+			next.setLocationRelativeTo(null);
+			dispose();
 		});
 		btnNewButton.setForeground(new Color(138, 55, 84));
 		btnNewButton.setFont(new Font("Trebuchet MS", Font.BOLD, 24));
@@ -278,8 +304,7 @@ public class MainPage extends JFrame {
 				PaymentFrame.pack();
 				PaymentFrame.setLocationRelativeTo(null);
 				setVisible(false);
-			
-		}
+			}
 		});
 		btnPayment.setForeground(new Color(138, 55, 84));
 		btnPayment.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -309,7 +334,7 @@ public class MainPage extends JFrame {
 				ReservationFrame.pack();
 				ReservationFrame.setLocationRelativeTo(null);
 				setVisible(false);
-		}
+			}
 		});
 		btnMyReservation.setForeground(new Color(138, 55, 84));
 		btnMyReservation.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -333,10 +358,9 @@ public class MainPage extends JFrame {
 		panel.setLayout(gl_panel);
 		contentPane.setLayout(gl_contentPane);
 	}
+
 	private void refreshEquipmentTable() {
-		if (table == null) {
-			return;
-		}
+		if (table == null) return;
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		List<Equipment> equipment = facade.listEquipment();
@@ -344,17 +368,14 @@ public class MainPage extends JFrame {
 			model.addRow(new Object[] { e.getEquipmentId(), e.getDescription(), e.getLocation(), e.getStatus().toString() });
 		}
 	}
+
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
+				if (e.isPopupTrigger()) showMenu(e);
 			}
 			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
+				if (e.isPopupTrigger()) showMenu(e);
 			}
 			private void showMenu(MouseEvent e) {
 				popup.show(e.getComponent(), e.getX(), e.getY());
