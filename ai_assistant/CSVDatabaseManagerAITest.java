@@ -12,7 +12,7 @@ public class CSVDatabaseManagerAITest {
     private CSVDatabaseManager db;
 
     @BeforeEach
-    void setup() {
+    public void setup() {
         db = CSVDatabaseManager.getInstance();
         db.writeUsers(new ArrayList<>());
         db.writeEquipment(new ArrayList<>());
@@ -21,48 +21,48 @@ public class CSVDatabaseManagerAITest {
     }
 
     @Test
-    void testSingletonInstance() {
+    public void testSingletonInstance() {
         CSVDatabaseManager db2 = CSVDatabaseManager.getInstance();
         assertSame(db, db2);
     }
 
     @Test
-    void testReadUsersEmpty() {
+    public void testReadUsersEmpty() {
         assertTrue(db.readUsers().isEmpty());
     }
 
     @Test
-    void testWriteUsers() {
+    public void testWriteUsers() {
         List<User> users = new ArrayList<>();
         db.writeUsers(users);
         assertEquals(0, db.readUsers().size());
     }
 
     @Test
-    void testWriteUsersNull() {
+    public void testWriteUsersNull() {
         db.writeUsers(null);
         assertTrue(db.readUsers().isEmpty());
     }
 
     @Test
-    void testReadEquipmentEmpty() {
+    public void testReadEquipmentEmpty() {
         assertTrue(db.readEquipment().isEmpty());
     }
 
     @Test
-    void testWriteEquipmentNull() {
+    public void testWriteEquipmentNull() {
         db.writeEquipment(null);
         assertTrue(db.readEquipment().isEmpty());
     }
 
     @Test
-    void testReservationsWriteAndRead() {
+    public void testReservationsWriteAndRead() {
         db.writeReservations(new ArrayList<>());
         assertEquals(0, db.readReservations().size());
     }
 
     @Test
-    void testPaymentsWriteAndRead() {
+    public void testPaymentsWriteAndRead() {
         db.writePayments(new ArrayList<>());
         assertEquals(0, db.readPayments().size());
     }
