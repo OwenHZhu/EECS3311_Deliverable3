@@ -14,20 +14,20 @@ public class SensorAITest {
     private UsageLogger logger;
 
     @BeforeEach
-    void setup() {
+    public void setup() {
         sensor = new Sensor("S1", SensorStatus.Active);
         logger = new UsageLogger();
     }
 
     @Test
-    void testAttachObserver() {
+    public void testAttachObserver() {
         sensor.attach(logger);
         sensor.recordUsage(new UsageData("E1", "OK", LocalDateTime.now()));
         assertEquals(1, logger.getRecords().size());
     }
 
     @Test
-    void testDetachObserver() {
+    public void testDetachObserver() {
         sensor.attach(logger);
         sensor.detach(logger);
         sensor.recordUsage(new UsageData("E1", "OK", LocalDateTime.now()));
@@ -35,14 +35,14 @@ public class SensorAITest {
     }
 
     @Test
-    void testAttachNullThrows() {
+    public void testAttachNullThrows() {
         assertThrows(IllegalArgumentException.class, () -> {
             sensor.attach(null);
         });
     }
 
     @Test
-    void testNotifyMultipleObservers() {
+    public void testNotifyMultipleObservers() {
         UsageLogger logger2 = new UsageLogger();
         sensor.attach(logger);
         sensor.attach(logger2);
@@ -54,7 +54,7 @@ public class SensorAITest {
     }
 
     @Test
-    void testLastUpdateTimeChanges() {
+    public void testLastUpdateTimeChanges() {
         var before = sensor.getLastUpdateTime();
         sensor.recordUsage(new UsageData("E1", "OK", LocalDateTime.now()));
         assertTrue(sensor.getLastUpdateTime().isAfter(before) || 
