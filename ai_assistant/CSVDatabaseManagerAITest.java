@@ -1,11 +1,10 @@
 package ai_assistant;
 
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 import main.models.*;
-import org.junit.jupiter.api.*;
-
 import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class CSVDatabaseManagerAITest {
 
