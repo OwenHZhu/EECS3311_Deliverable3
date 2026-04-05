@@ -10,7 +10,7 @@ public class UsageLoggerAITest {
 
     private UsageLogger logger;
 
-    @BeforeEach
+    @Before
     public void setup() {
         logger = new UsageLogger();
     }
