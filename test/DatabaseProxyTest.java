@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,89 +36,88 @@ public class DatabaseProxyTest {
     // Test 1
     @Test
     public void readUsers_delegatesToReal() {
-        Student s = new Student("u1", "Test", "test@yorku.ca", "Pass123!", "S123", "CS", AccountStatus.Active);
-        realManager.writeUsers(Arrays.asList(s));
+        User user = new Student("u1", "Alice", "alice@yorku.ca", "Pass@123", "S1", "CS", AccountStatus.Active);
+        realManager.writeUsers(List.of(user));
         assertEquals(1, proxy.readUsers().size());
     }
 
     // Test 2
     @Test
-    public void readUsers_delegatesToReal() {
-        Student s = new Student("u1", "Test", "test@yorku.ca", "Pass123!", "S123", "CS", AccountStatus.Active);
-        realManager.writeUsers(Arrays.asList(s));
-        assertEquals(1, proxy.readUsers().size());
+    public void writeUsers_delegatesToReal() {
+        User user = new Student("u2", "Bob", "bob@yorku.ca", "Strong@456", "S2", "Math", AccountStatus.PendingApproval);
+        proxy.writeUsers(List.of(user));
+        assertEquals(1, realManager.readUsers().size());
+        assertEquals("bob@yorku.ca", realManager.readUsers().get(0).getEmail());
     }
+
 
     // Test 3
     @Test
     public void readReservations_delegates() {
-        Equipment e = new Equipment("E01", "Scope", "Lab", EquipmentStatus.Available);
-        Student u = new Student("u1", "Name", "email@yorku.ca", "Pass123!", "ID", "CS", AccountStatus.Active);
-        LocalDateTime start = LocalDateTime.now();
-        LocalDateTime end = start.plusHours(1);
-        Reservation r = new Reservation("Reserv1", start, end, ReservationStatus.Active, 10.0, e, u);
-        realManager.writeReservations(Arrays.asList(r));
+        LocalDateTime start = LocalDateTime.of(2026, 4, 5, 10, 0);
+        Reservation r = new Reservation("R101", start, start.plusHours(1), ReservationStatus.Active, 10.0, null, null);
+        realManager.writeReservations(List.of(r));
         assertEquals(1, proxy.readReservations().size());
     }
-
+ 
     // Test 4
     @Test
     public void writeReservations_delegates() {
-        Equipment e = new Equipment("E01", "Scope", "Lab", EquipmentStatus.Available);
-        Student u = new Student("u1", "Name", "email@yorku.ca", "Pass123!", "ID", "CS", AccountStatus.Active);
         LocalDateTime start = LocalDateTime.now();
-        LocalDateTime end = start.plusHours(1);
-        Reservation r = new Reservation("Reserv2", start, end, ReservationStatus.Active, 10.0, e, u);
-        proxy.writeReservations(Arrays.asList(r));
+        Reservation r = new Reservation("R102", start, start.plusHours(2), ReservationStatus.Active, 20.0, null, null);
+        proxy.writeReservations(List.of(r));
         assertEquals(1, realManager.readReservations().size());
+        assertEquals("R102", realManager.readReservations().get(0).getReservationId());
     }
-    
+ 
     // Test 5
     @Test(expected = IllegalArgumentException.class)
     public void constructor_nullManager_throwsException() {
         new DatabaseProxy(null);
     }
-    
+
     // Test 6
     @Test
     public void readEquipment_delegates() {
-        Equipment e = new Equipment("Equip01", "Scope", "Lab1", EquipmentStatus.Available);
-        realManager.writeEquipment(Arrays.asList(e));
+        Equipment e = new Equipment("E01", "Microscope", "Lab A", EquipmentStatus.Available);
+        realManager.writeEquipment(List.of(e));
         assertEquals(1, proxy.readEquipment().size());
     }
-
+ 
     // Test 7
     @Test
     public void writeEquipment_delegates() {
-        Equipment e = new Equipment("Equip02", "Centrifuge", "Lab2", EquipmentStatus.Available);
-        proxy.writeEquipment(Arrays.asList(e));
+        Equipment e = new Equipment("E02", "Centrifuge", "Lab B", EquipmentStatus.Available);
+        proxy.writeEquipment(List.of(e));
         assertEquals(1, realManager.readEquipment().size());
-        assertEquals("Equip02", realManager.readEquipment().get(0).getEquipmentId());
+        assertEquals("E02", realManager.readEquipment().get(0).getEquipmentId());
     }
-
+ 
     // Test 8
     @Test
     public void readPayments_delegates() {
-        Payment p = new Payment("Pay1", 200.0, PaymentMethod.Grant);
-        realManager.writePayments(Arrays.asList(p));
+        Payment p = new Payment("P001", 200.0, PaymentMethod.Grant);
+        realManager.writePayments(List.of(p));
         assertEquals(1, proxy.readPayments().size());
     }
-
+ 
     // Test 9
     @Test
     public void writePayments_delegates() {
-        Payment p = new Payment("Pay2", 150.0, PaymentMethod.Institutional);
-        proxy.writePayments(Arrays.asList(p));
+        Payment p = new Payment("P002", 150.0, PaymentMethod.Institutional);
+        proxy.writePayments(List.of(p));
         assertEquals(1, realManager.readPayments().size());
+        assertEquals(150.0, realManager.readPayments().get(0).getAmount(), 0.001);
     }
+
 
     // Test 10
     @Test
     public void multipleOperations_workCorrectly() {
-        Student s = new Student("u1", "Test", "test@yorku.ca", "Pwd1!", "S123", "CS", AccountStatus.Active);
-        proxy.writeUsers(Arrays.asList(s));
-        Equipment e = new Equipment("Equip99", "Tester", "LabX", EquipmentStatus.Available);
-        proxy.writeEquipment(Arrays.asList(e));
+        User user = new Student("u3", "Charlie", "charlie@yorku.ca", "Pwd@789", "S3", "CS", AccountStatus.Active);
+        proxy.writeUsers(List.of(user));
+        Equipment e = new Equipment("E99", "Tester", "LabX", EquipmentStatus.Available);
+        proxy.writeEquipment(List.of(e));
         assertEquals(1, proxy.readUsers().size());
         assertEquals(1, proxy.readEquipment().size());
         assertTrue(proxy.readReservations().isEmpty());
