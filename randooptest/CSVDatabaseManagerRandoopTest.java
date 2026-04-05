@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CSVDatabaseManagerRandoopTest {
+public class RegressionTest2 {
 
     public static boolean debug = false;
 
