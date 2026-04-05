@@ -1,16 +1,17 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
 import main.enums.EquipmentStatus;
+import main.enums.PaymentMethod;
 import main.models.CSVDatabaseManager;
 import main.models.Equipment;
 import main.models.Payment;
@@ -38,7 +39,7 @@ public class CSVDatabaseManagerTest {
     // Test 2
     @Test
     public void writeUsers_nullClearsUsers() {
-        manager.writeUsers(List.of(new Student("student1@yorku.ca", "Password123!")));
+        manager.writeUsers(Arrays.asList(new Student("student1@yorku.ca", "Password123!")));
         manager.writeUsers(null);
         assertTrue(manager.readUsers().isEmpty());
     }
@@ -46,7 +47,7 @@ public class CSVDatabaseManagerTest {
     // Test 3
     @Test
     public void writeUsers_savesAndReadsUsers() {
-        List<User> users = List.of(new Student("student1@yorku.ca", "Password123!"));
+        List<User> users = Arrays.asList(new Student("student1@yorku.ca", "Password123!"));
         manager.writeUsers(users);
         List<User> retrieved = manager.readUsers();
         assertEquals(1, retrieved.size());
@@ -57,7 +58,7 @@ public class CSVDatabaseManagerTest {
     @Test
     public void writeEquipment_savesAndReadsEquipment() {
         Equipment e = new Equipment("Equip01", "Microscope", "Lab A", EquipmentStatus.Available);
-        manager.writeEquipment(List.of(e));
+        manager.writeEquipment(Arrays.asList(e));
         List<Equipment> list = manager.readEquipment();
         assertEquals(1, list.size());
         assertEquals("Equip01", list.get(0).getEquipmentId());
@@ -66,7 +67,7 @@ public class CSVDatabaseManagerTest {
     // Test 5
     @Test
     public void writeEquipment_nullClears() {
-        manager.writeEquipment(List.of(new Equipment("Equip01", "", "", EquipmentStatus.Available)));
+        manager.writeEquipment(Arrays.asList(new Equipment("Equip01", "", "", EquipmentStatus.Available)));
         manager.writeEquipment(null);
         assertTrue(manager.readEquipment().isEmpty());
     }
@@ -81,14 +82,14 @@ public class CSVDatabaseManagerTest {
     @Test
     public void writeReservations_savesAndReads() {
         Reservation r = new Reservation("Reserv1", "user1", "Equip01", 2);
-        manager.writeReservations(List.of(r));
+        manager.writeReservations(Arrays.asList(r));
         assertEquals(1, manager.readReservations().size());
     }
 
     // Test 8
     @Test
     public void writeReservations_nullClears() {
-        manager.writeReservations(List.of(new Reservation("Reserv1", "u", "e", 1)));
+        manager.writeReservations(Arrays.asList(new Reservation("Reserv1", "u", "e", 1)));
         manager.writeReservations(null);
         assertTrue(manager.readReservations().isEmpty());
     }
@@ -96,15 +97,15 @@ public class CSVDatabaseManagerTest {
     // Test 9
     @Test
     public void writePayments_savesAndReads() {
-        Payment p = new Payment("Pay1", 100.0, "Credit");
-        manager.writePayments(List.of(p));
+        Payment p = new Payment("Pay1", 100.0, PaymentMethod.CREDIT);
+        manager.writePayments(Arrays.asList(p));
         assertEquals(1, manager.readPayments().size());
     }
 
     // Test 10
     @Test
     public void writePayments_nullClears() {
-        manager.writePayments(List.of(new Payment("Pay1", 50.0, "Debit")));
+        manager.writePayments(Arrays.asList(new Payment("Pay1", 50.0, PaymentMethod.DEBIT)));
         manager.writePayments(null);
         assertTrue(manager.readPayments().isEmpty());
     }
@@ -112,17 +113,17 @@ public class CSVDatabaseManagerTest {
     // Test 11
     @Test
     public void writeUsers_doesNotAffectEquipment() {
-        manager.writeUsers(List.of(new Student("student1@yorku.ca", "Password123!")));
+        manager.writeUsers(Arrays.asList(new Student("student1@yorku.ca", "Password123!")));
         assertTrue(manager.readEquipment().isEmpty());
     }
     
     // Test 12
     @Test
     public void readUsers_returnsDefensiveCopy() {
-        List<User> original = List.of(new Student("student1@yorku.ca", "Password123!"));
+        List<User> original = Arrays.asList(new Student("student1@yorku.ca", "Password123!"));
         manager.writeUsers(original);
         List<User> retrieved = manager.readUsers();
-        retrieved.clear(); // should not affect internal state
+        retrieved.clear();
         assertEquals(1, manager.readUsers().size());
     }
 
