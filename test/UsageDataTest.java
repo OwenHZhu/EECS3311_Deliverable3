@@ -16,8 +16,8 @@ public class UsageDataTest {
     @Test
     public void constructor_setsAllFields() {
         LocalDateTime now = LocalDateTime.now();
-        UsageData data = new UsageData("E01", "ACTIVE", now);
-        assertEquals("E01", data.getEquipmentId());
+        UsageData data = new UsageData("Equip01", "ACTIVE", now);
+        assertEquals("Equip01", data.getEquipmentId());
         assertEquals("ACTIVE", data.getOperationStatus());
         assertEquals(now, data.getRecordedAt());
     }
@@ -32,14 +32,14 @@ public class UsageDataTest {
     // Test 3
     @Test
     public void constructor_nullStatus_allowed() {
-        UsageData data = new UsageData("E01", null, LocalDateTime.now());
+        UsageData data = new UsageData("Equip01", null, LocalDateTime.now());
         assertNull(data.getOperationStatus());
     }
 
     // Test 4
     @Test
     public void constructor_nullTimestamp_allowed() {
-        UsageData data = new UsageData("E01", "OK", null);
+        UsageData data = new UsageData("Equip01", "OK", null);
         assertNull(data.getRecordedAt());
     }
 
@@ -55,7 +55,7 @@ public class UsageDataTest {
     // Test 6
     @Test
     public void getters_returnSameValuesAsConstructor() {
-        String id = "E99";
+        String id = "Equip99";
         String status = "IDLE";
         LocalDateTime time = LocalDateTime.of(2026, 4, 4, 10, 30);
         UsageData data = new UsageData(id, status, time);
@@ -68,16 +68,16 @@ public class UsageDataTest {
     @Test
     public void object_isImmutable() {
         LocalDateTime time = LocalDateTime.now();
-        UsageData data = new UsageData("E01", "OK", time);
-        assertEquals("E01", data.getEquipmentId());
+        UsageData data = new UsageData("Equip01", "OK", time);
+        assertEquals("Equip01", data.getEquipmentId());
     }
 
     // Test 8
     @Test
     public void multipleInstances_areIndependent() {
         LocalDateTime time = LocalDateTime.now();
-        UsageData d1 = new UsageData("E01", "A", time);
-        UsageData d2 = new UsageData("E01", "A", time);
+        UsageData d1 = new UsageData("Equip01", "A", time);
+        UsageData d2 = new UsageData("Equip01", "A", time);
         assertEquals(d1.getEquipmentId(), d2.getEquipmentId());
         assertNotSame(d1, d2);
     }
@@ -97,7 +97,7 @@ public class UsageDataTest {
     @Test
     public void recordedAt_referencePreserved() {
         LocalDateTime time = LocalDateTime.now();
-        UsageData data = new UsageData("E01", "OK", time);
+        UsageData data = new UsageData("Equip01", "OK", time);
         assertSame(time, data.getRecordedAt());
     }
 }
