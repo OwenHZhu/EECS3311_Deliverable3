@@ -33,23 +33,23 @@ public class DatabaseProxyTest {
     // Test 1
     @Test
     public void readUsers_delegatesToReal() {
-        realManager.writeUsers(List.of(new Student("s1@yorku.ca", "Password123!")));
+        realManager.writeUsers(List.of(new Student("student1@yorku.ca", "Password123!")));
         assertEquals(1, proxy.readUsers().size());
     }
 
     // Test 2
     @Test
     public void writeUsers_delegatesToReal() {
-        List<User> users = List.of(new Student("s2@yorku.ca", "Password456!"));
+        List<User> users = List.of(new Student("student2@yorku.ca", "Password456!"));
         proxy.writeUsers(users);
         assertEquals(1, realManager.readUsers().size());
-        assertEquals("s2@yorku.ca", realManager.readUsers().get(0).getEmail());
+        assertEquals("student2@yorku.ca", realManager.readUsers().get(0).getEmail());
     }
 
     // Test 3
     @Test
     public void readReservations_delegates() {
-        Reservation r = new Reservation("R1", "u1", "e1", 3);
+        Reservation r = new Reservation("Reserv1", "u1", "e1", 3);
         realManager.writeReservations(List.of(r));
         assertEquals(1, proxy.readReservations().size());
     }
@@ -57,7 +57,7 @@ public class DatabaseProxyTest {
     // Test 4
     @Test
     public void writeReservations_delegates() {
-        Reservation r = new Reservation("R2", "u2", "e2", 1);
+        Reservation r = new Reservation("Reserv2", "u2", "e2", 1);
         proxy.writeReservations(List.of(r));
         assertEquals(1, realManager.readReservations().size());
     }
@@ -71,7 +71,7 @@ public class DatabaseProxyTest {
     // Test 6
     @Test
     public void readEquipment_delegates() {
-        Equipment e = new Equipment("E01", "Scope", "Lab1", EquipmentStatus.Available);
+        Equipment e = new Equipment("Equip01", "Scope", "Lab1", EquipmentStatus.Available);
         realManager.writeEquipment(List.of(e));
         assertEquals(1, proxy.readEquipment().size());
     }
@@ -79,16 +79,16 @@ public class DatabaseProxyTest {
     // Test 7
     @Test
     public void writeEquipment_delegates() {
-        Equipment e = new Equipment("E02", "Centrifuge", "Lab2", EquipmentStatus.Available);
+        Equipment e = new Equipment("Equip02", "Centrifuge", "Lab2", EquipmentStatus.Available);
         proxy.writeEquipment(List.of(e));
         assertEquals(1, realManager.readEquipment().size());
-        assertEquals("E02", realManager.readEquipment().get(0).getEquipmentId());
+        assertEquals("Equip02", realManager.readEquipment().get(0).getEquipmentId());
     }
 
     // Test 8
     @Test
     public void readPayments_delegates() {
-        Payment p = new Payment("P1", 200.0, "Grant");
+        Payment p = new Payment("Pay1", 200.0, "Grant");
         realManager.writePayments(List.of(p));
         assertEquals(1, proxy.readPayments().size());
     }
@@ -96,7 +96,7 @@ public class DatabaseProxyTest {
     // Test 9
     @Test
     public void writePayments_delegates() {
-        Payment p = new Payment("P2", 150.0, "Institutional");
+        Payment p = new Payment("Pay2", 150.0, "Institutional");
         proxy.writePayments(List.of(p));
         assertEquals(1, realManager.readPayments().size());
     }
@@ -104,8 +104,8 @@ public class DatabaseProxyTest {
     // Test 10
     @Test
     public void multipleOperations_workCorrectly() {
-        proxy.writeUsers(List.of(new Student("s1@yorku.ca", "Pwd1!")));
-        proxy.writeEquipment(List.of(new Equipment("E99", "Tester", "LabX", EquipmentStatus.Available)));
+        proxy.writeUsers(List.of(new Student("student1@yorku.ca", "Pwd1!")));
+        proxy.writeEquipment(List.of(new Equipment("Equip99", "Tester", "LabX", EquipmentStatus.Available)));
         assertEquals(1, proxy.readUsers().size());
         assertEquals(1, proxy.readEquipment().size());
         assertTrue(proxy.readReservations().isEmpty());
