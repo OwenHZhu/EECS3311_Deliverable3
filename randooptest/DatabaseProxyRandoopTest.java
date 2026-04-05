@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class DatabaseProxyRandoopTest {
+public class RegressionTest3 {
 
     public static boolean debug = false;
 
