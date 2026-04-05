@@ -33,14 +33,14 @@ public class SensorTest {
 
     @Before
     public void setUp() {
-        sensor = new Sensor("S01", SensorStatus.Active);
+        sensor = new Sensor("Sen01", SensorStatus.Active);
         observer = new TestObserver();
     }
 
     // Test 1
     @Test
     public void constructor_setsIdAndStatus() {
-        assertEquals("S01", sensor.getSensorId());
+        assertEquals("Sen01", sensor.getSensorId());
         assertEquals(SensorStatus.Active, sensor.getStatus());
         assertNotNull(sensor.getLastUpdateTime());
     }
@@ -49,7 +49,7 @@ public class SensorTest {
     @Test
     public void attach_addsObserver() {
         sensor.attach(observer);
-        sensor.notifyObservers(new UsageData("E01", "OK", LocalDateTime.now()));
+        sensor.notifyObservers(new UsageData("Equip01", "OK", LocalDateTime.now()));
         assertNotNull(observer.lastData);
     }
 
@@ -64,7 +64,7 @@ public class SensorTest {
     public void detach_removesObserver() {
         sensor.attach(observer);
         sensor.detach(observer);
-        sensor.notifyObservers(new UsageData("E01", "OK", LocalDateTime.now()));
+        sensor.notifyObservers(new UsageData("Equip01", "OK", LocalDateTime.now()));
         assertNull(observer.lastData);
     }
 
@@ -74,7 +74,7 @@ public class SensorTest {
         TestObserver obs2 = new TestObserver();
         sensor.attach(observer);
         sensor.attach(obs2);
-        UsageData data = new UsageData("E02", "MAINTENANCE", LocalDateTime.now());
+        UsageData data = new UsageData("Equip02", "MAINTENANCE", LocalDateTime.now());
         sensor.notifyObservers(data);
         assertSame(data, observer.lastData);
         assertSame(data, obs2.lastData);
@@ -86,7 +86,7 @@ public class SensorTest {
         sensor.attach(observer);
         LocalDateTime before = sensor.getLastUpdateTime();
         Thread.sleep(1);
-        UsageData data = new UsageData("E03", "ACTIVE", LocalDateTime.now());
+        UsageData data = new UsageData("Equip03", "ACTIVE", LocalDateTime.now());
         sensor.recordUsage(data);
         assertTrue(sensor.getLastUpdateTime().isAfter(before));
         assertSame(data, observer.lastData);
@@ -95,8 +95,8 @@ public class SensorTest {
     // Test 7
     @Test
     public void setSensorId_updatesId() {
-        sensor.setSensorId("S99");
-        assertEquals("S99", sensor.getSensorId());
+        sensor.setSensorId("Sen99");
+        assertEquals("Sen99", sensor.getSensorId());
     }
 
     // Test 8
@@ -121,7 +121,7 @@ public class SensorTest {
         TestObserver o2 = new TestObserver();
         sensor.attach(o1);
         sensor.attach(o2);
-        UsageData data = new UsageData("E04", "IDLE", LocalDateTime.now());
+        UsageData data = new UsageData("Equip04", "IDLE", LocalDateTime.now());
         sensor.notifyObservers(data);
         assertSame(data, o1.lastData);
         assertSame(data, o2.lastData);
