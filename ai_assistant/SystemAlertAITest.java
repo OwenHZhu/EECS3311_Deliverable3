@@ -1,35 +1,35 @@
 package ai_assistant;
 
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 import main.models.*;
-import org.junit.jupiter.api.*;
 
 import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class SystemAlertAITest {
 
     private SystemAlert alert;
 
     @BeforeEach
-    void setup() {
+    public void setup() {
         alert = new SystemAlert();
     }
 
     @Test
-    void testUpdateAddsMessage() {
+    public void testUpdateAddsMessage() {
         alert.update(new UsageData("E1", "OK", LocalDateTime.now()));
         assertEquals(1, alert.getMessages().size());
     }
 
     @Test
-    void testUpdateNullIgnored() {
+    public void testUpdateNullIgnored() {
         alert.update(null);
         assertTrue(alert.getMessages().isEmpty());
     }
 
     @Test
-    void testMessageContent() {
+    public void testMessageContent() {
         alert.update(new UsageData("E1", "FAIL", LocalDateTime.now()));
         assertTrue(alert.getMessages().get(0).contains("E1"));
     }
