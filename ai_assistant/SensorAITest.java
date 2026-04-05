@@ -12,7 +12,7 @@ public class SensorAITest {
     private Sensor sensor;
     private UsageLogger logger;
 
-    @BeforeEach
+    @Before
     public void setup() {
         sensor = new Sensor("S1", SensorStatus.Active);
         logger = new UsageLogger();
