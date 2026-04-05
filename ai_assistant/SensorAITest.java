@@ -1,12 +1,11 @@
 package ai_assistant;
 
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 import main.models.*;
 import main.enums.SensorStatus;
-import org.junit.jupiter.api.*;
-
 import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class SensorAITest {
 
