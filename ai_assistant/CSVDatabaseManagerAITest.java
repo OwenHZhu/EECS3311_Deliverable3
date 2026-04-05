@@ -10,7 +10,7 @@ public class CSVDatabaseManagerAITest {
 
     private CSVDatabaseManager db;
 
-    @BeforeEach
+    @Before
     public void setup() {
         db = CSVDatabaseManager.getInstance();
         db.writeUsers(new ArrayList<>());
