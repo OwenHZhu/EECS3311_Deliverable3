@@ -30,11 +30,11 @@ public class SystemAlertTest {
     // Test 2
     @Test
     public void update_addsMessage() {
-        UsageData data = new UsageData("E01", "ERROR", LocalDateTime.now());
+        UsageData data = new UsageData("Equip01", "ERROR", LocalDateTime.now());
         alert.update(data);
         List<String> msgs = alert.getMessages();
         assertEquals(1, msgs.size());
-        assertTrue(msgs.get(0).contains("E01") && msgs.get(0).contains("ERROR"));
+        assertTrue(msgs.get(0).contains("Equip01") && msgs.get(0).contains("ERROR"));
     }
 
     // Test 3
@@ -47,8 +47,8 @@ public class SystemAlertTest {
     // Test 4
     @Test
     public void update_multiple_addsAll() {
-        UsageData d1 = new UsageData("E01", "OVERHEAT", LocalDateTime.now());
-        UsageData d2 = new UsageData("E02", "IDLE", LocalDateTime.now());
+        UsageData d1 = new UsageData("Equip01", "OVERHEAT", LocalDateTime.now());
+        UsageData d2 = new UsageData("Equip02", "IDLE", LocalDateTime.now());
         alert.update(d1);
         alert.update(d2);
         assertEquals(2, alert.getMessages().size());
@@ -66,7 +66,7 @@ public class SystemAlertTest {
     // Test 6
     @Test
     public void getMessages_returnsCopy() {
-        alert.update(new UsageData("E01", "WARN", LocalDateTime.now()));
+        alert.update(new UsageData("Equip01", "WARN", LocalDateTime.now()));
         List<String> retrieved = alert.getMessages();
         retrieved.clear();
         assertEquals(1, alert.getMessages().size());
@@ -75,7 +75,7 @@ public class SystemAlertTest {
     // Test 7
     @Test
     public void update_duplicateData_allowsMultiple() {
-        UsageData data = new UsageData("E01", "ALERT", LocalDateTime.now());
+        UsageData data = new UsageData("Equip01", "ALERT", LocalDateTime.now());
         alert.update(data);
         alert.update(data);
         assertEquals(2, alert.getMessages().size());
@@ -84,17 +84,17 @@ public class SystemAlertTest {
     // Test 8
     @Test
     public void update_differentEquipmentIds_separateMessages() {
-        alert.update(new UsageData("E1", "OK", null));
-        alert.update(new UsageData("E2", "FAIL", null));
+        alert.update(new UsageData("Equip1", "OK", null));
+        alert.update(new UsageData("Equip2", "FAIL", null));
         List<String> msgs = alert.getMessages();
-        assertTrue(msgs.get(0).contains("E1"));
-        assertTrue(msgs.get(1).contains("E2"));
+        assertTrue(msgs.get(0).contains("Equip1"));
+        assertTrue(msgs.get(1).contains("Equip2"));
     }
 
     // Test 9
     @Test
     public void update_nullOperationStatus_handles() {
-        UsageData data = new UsageData("E01", null, LocalDateTime.now());
+        UsageData data = new UsageData("Equip01", null, LocalDateTime.now());
         alert.update(data);
         assertTrue(alert.getMessages().get(0).contains("null"));
     }
