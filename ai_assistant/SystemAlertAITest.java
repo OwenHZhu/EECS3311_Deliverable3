@@ -11,7 +11,7 @@ public class SystemAlertAITest {
 
     private SystemAlert alert;
 
-    @BeforeEach
+    @Before
     public void setup() {
         alert = new SystemAlert();
     }
