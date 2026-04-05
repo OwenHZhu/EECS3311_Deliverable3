@@ -10,7 +10,7 @@ public class DatabaseProxyAITest {
 
     private DatabaseProxy proxy;
 
-    @BeforeEach
+    @Before
     public void setup() {
         proxy = new DatabaseProxy(CSVDatabaseManager.getInstance());
     }
