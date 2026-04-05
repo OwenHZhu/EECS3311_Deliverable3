@@ -1,58 +1,57 @@
 package ai_assistant;
 
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 import main.models.*;
-import org.junit.jupiter.api.*;
-
 import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class DatabaseProxyAITest {
 
     private DatabaseProxy proxy;
 
     @BeforeEach
-    void setup() {
+    public void setup() {
         proxy = new DatabaseProxy(CSVDatabaseManager.getInstance());
     }
 
     @Test
-    void testConstructorNullThrows() {
+    public void testConstructorNullThrows() {
         assertThrows(IllegalArgumentException.class, () -> {
             new DatabaseProxy(null);
         });
     }
 
     @Test
-    void testReadUsersDelegation() {
+    public void testReadUsersDelegation() {
         assertNotNull(proxy.readUsers());
     }
 
     @Test
-    void testWriteUsersDelegation() {
+    public void testWriteUsersDelegation() {
         proxy.writeUsers(new ArrayList<>());
         assertEquals(0, proxy.readUsers().size());
     }
 
     @Test
-    void testReadEquipmentDelegation() {
+    public void testReadEquipmentDelegation() {
         assertNotNull(proxy.readEquipment());
     }
 
     @Test
-    void testWriteEquipmentDelegation() {
+    public void testWriteEquipmentDelegation() {
         proxy.writeEquipment(new ArrayList<>());
         assertEquals(0, proxy.readEquipment().size());
     }
 
     @Test
-    void testReservationsDelegation() {
+    public void testReservationsDelegation() {
         proxy.writeReservations(new ArrayList<>());
         assertEquals(0, proxy.readReservations().size());
     }
 
     @Test
-    void testPaymentsDelegation() {
+    public void testPaymentsDelegation() {
         proxy.writePayments(new ArrayList<>());
         assertEquals(0, proxy.readPayments().size());
     }
