@@ -1,16 +1,14 @@
 package ai_assistant;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
 import main.models.*;
-import org.junit.jupiter.api.*;
-
 import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class UsageDataAITest {
 
     @Test
-    void testGetters() {
+    public void testGetters() {
         LocalDateTime now = LocalDateTime.now();
         UsageData data = new UsageData("E1", "OK", now);
 
