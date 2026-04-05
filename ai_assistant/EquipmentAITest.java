@@ -11,7 +11,7 @@ public class EquipmentAITest {
 
     private Equipment equipment;
 
-    @BeforeEach
+    @Before
     public void setup() {
         equipment = new Equipment("E1", "Microscope", "Lab", EquipmentStatus.Available);
     }
