@@ -1,11 +1,11 @@
-package test.java.randoop;
+package randooptest;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class RegressionTest4 {
+public class SystemAlertRandoopTest {
 
     public static boolean debug = false;
 
