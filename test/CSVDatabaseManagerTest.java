@@ -135,10 +135,10 @@ public class CSVDatabaseManagerTest {
     
     // Test 12
     @Test
-    public void writeUsers_doesNotAffectEquipment() {
-        Student student = new Student("u1", "Test User", "test@yorku.ca", "Pass123!", "S123", "CS", AccountStatus.Active);
-        manager.writeUsers(Arrays.asList(student));
-        assertTrue(manager.readEquipment().isEmpty());
+    public void writeEquipment_doesNotAffectUsers() {
+        Equipment e = new Equipment("Equip99", "Laser", "Lab C", EquipmentStatus.Available);
+        manager.writeEquipment(Arrays.asList(e));
+        assertTrue(manager.readUsers().isEmpty());
     }
 
     private void resetSingleton() throws Exception {

@@ -7,7 +7,7 @@ import main.enums.ReservationStatus;
 
 import java.time.LocalDateTime;
 
-public class Deliverable2PatternSmokeTest {
+public class Deliverable3PatternSmokeTest {
     public static void main(String[] args) {
         testPasswordVerification();
         testSingletonHeadLabCoordinator();

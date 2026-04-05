@@ -16,6 +16,18 @@ public final class UserFactory {
         if (type == null) {
             throw new IllegalArgumentException("type cannot be null.");
         }
+        if (userId == null) {
+            throw new IllegalArgumentException("userId cannot be null.");
+        }
+        if (email == null) {
+            throw new IllegalArgumentException("email cannot be null.");
+        }
+        if (password == null) {
+            throw new IllegalArgumentException("password cannot be null.");
+        }
+        if (idOrCertificationNumber == null) {
+            throw new IllegalArgumentException("idOrCertificationNumber cannot be null.");
+        }
         return switch (type.toLowerCase()) {
             case "student" -> new Student(userId, name, email, password, idOrCertificationNumber, department, status);
             case "faculty" -> new Faculty(userId, name, email, password, idOrCertificationNumber, department, status);

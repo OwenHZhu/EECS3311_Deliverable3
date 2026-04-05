@@ -1,4 +1,4 @@
-package testcases;
+package test;
 
 import org.junit.Test;
 import org.junit.Before;
@@ -27,7 +27,6 @@ public class UserTest {
     private String idNumber;
     private String department;
     private AccountStatus status;
-	
 	
 	@Before
     public void setUp() {

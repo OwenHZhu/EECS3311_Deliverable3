@@ -1,4 +1,4 @@
-package testcases;
+package test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -14,8 +14,6 @@ import main.models.Guest;
 public class ApprovalRequestTest {
 	private String requestId;
     private ApprovalStatus status;
-
-    
     
     @Before
     public void setUp() {
@@ -61,10 +59,4 @@ public class ApprovalRequestTest {
     	request.setRequestId("202");
     	assertEquals("202", request.getRequestId());
     }
-    
-    
-    
-
-
-    
 }
