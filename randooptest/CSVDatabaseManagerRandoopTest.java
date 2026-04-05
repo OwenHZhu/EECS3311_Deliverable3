@@ -1,4 +1,4 @@
-package test;
+package randooptest;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
