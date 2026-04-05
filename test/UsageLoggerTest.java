@@ -32,7 +32,7 @@ public class UsageLoggerTest {
     // Test 2
     @Test
     public void update_addsUsageData() {
-        UsageData data = new UsageData("E01", "OK", LocalDateTime.now());
+        UsageData data = new UsageData("Equip01", "OK", LocalDateTime.now());
         logger.update(data);
         List<UsageData> records = logger.getRecords();
         assertEquals(1, records.size());
@@ -49,8 +49,8 @@ public class UsageLoggerTest {
     // Test 4
     @Test
     public void update_multiple_addsAll() {
-        UsageData d1 = new UsageData("E01", "A", LocalDateTime.now());
-        UsageData d2 = new UsageData("E02", "B", LocalDateTime.now());
+        UsageData d1 = new UsageData("Equip01", "A", LocalDateTime.now());
+        UsageData d2 = new UsageData("Equip02", "B", LocalDateTime.now());
         logger.update(d1);
         logger.update(d2);
         assertEquals(2, logger.getRecords().size());
@@ -60,7 +60,7 @@ public class UsageLoggerTest {
     // Test 5
     @Test
     public void getRecords_returnsCopy() {
-        UsageData data = new UsageData("E01", "OK", LocalDateTime.now());
+        UsageData data = new UsageData("Equip01", "OK", LocalDateTime.now());
         logger.update(data);
         List<UsageData> retrieved = logger.getRecords();
         retrieved.clear();
@@ -70,8 +70,8 @@ public class UsageLoggerTest {
     // Test 6
     @Test
     public void records_maintainOrder() {
-        UsageData first = new UsageData("E01", "First", LocalDateTime.now());
-        UsageData second = new UsageData("E02", "Second", LocalDateTime.now());
+        UsageData first = new UsageData("Equip01", "First", LocalDateTime.now());
+        UsageData second = new UsageData("Equip02", "Second", LocalDateTime.now());
         logger.update(first);
         logger.update(second);
         List<UsageData> records = logger.getRecords();
@@ -82,7 +82,7 @@ public class UsageLoggerTest {
     // Test 7
     @Test
     public void update_duplicateData_allowsMultiple() {
-        UsageData data = new UsageData("E01", "DUPLICATE", LocalDateTime.now());
+        UsageData data = new UsageData("Equip01", "DUPLICATE", LocalDateTime.now());
         logger.update(data);
         logger.update(data);
         assertEquals(2, logger.getRecords().size());
@@ -109,7 +109,7 @@ public class UsageLoggerTest {
     // Test 10
     @Test
     public void getRecords_returnsNewListEachTime() {
-        UsageData data = new UsageData("E01", "OK", LocalDateTime.now());
+        UsageData data = new UsageData("Equip01", "OK", LocalDateTime.now());
         logger.update(data);
         List<UsageData> list1 = logger.getRecords();
         List<UsageData> list2 = logger.getRecords();
