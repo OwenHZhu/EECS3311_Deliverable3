@@ -50,7 +50,7 @@ public class CSVDatabaseManagerTest {
         manager.writeUsers(users);
         List<User> retrieved = manager.readUsers();
         assertEquals(1, retrieved.size());
-        assertEquals("s1@yorku.ca", retrieved.get(0).getEmail());
+        assertEquals("student1@yorku.ca", retrieved.get(0).getEmail());
     }
 
     // Test 4
@@ -60,7 +60,7 @@ public class CSVDatabaseManagerTest {
         manager.writeEquipment(List.of(e));
         List<Equipment> list = manager.readEquipment();
         assertEquals(1, list.size());
-        assertEquals("E01", list.get(0).getEquipmentId());
+        assertEquals("Equip01", list.get(0).getEquipmentId());
     }
 
     // Test 5
