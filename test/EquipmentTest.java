@@ -23,13 +23,13 @@ public class EquipmentTest {
 
     @Before
     public void setUp() {
-        equipment = new Equipment("E001", "Microscope", "Lab A", EquipmentStatus.Available);
+        equipment = new Equipment("Equip001", "Microscope", "Lab A", EquipmentStatus.Available);
     }
 
     // Test 1
     @Test
     public void constructor_setsFields() {
-        assertEquals("E001", equipment.getEquipmentId());
+        assertEquals("Equip001", equipment.getEquipmentId());
         assertEquals("Microscope", equipment.getDescription());
         assertEquals("Lab A", equipment.getLocation());
         assertEquals(EquipmentStatus.Available, equipment.getStatus());
@@ -76,7 +76,7 @@ public class EquipmentTest {
     // Test 7
     @Test
     public void update_withMaintenanceStatus_setsMaintenanceState() {
-        UsageData data = new UsageData("E001", "MAINTENANCE", null);
+        UsageData data = new UsageData("Equip001", "MAINTENANCE", null);
         equipment.update(data);
         assertEquals(EquipmentStatus.Maintenance, equipment.getStatus());
     }
@@ -108,7 +108,7 @@ public class EquipmentTest {
     // Test 11
     @Test
     public void addSensor_addsToSensorsList() {
-        Sensor sensor = new Sensor("S99", SensorStatus.Active);
+        Sensor sensor = new Sensor("Sen99", SensorStatus.Active);
         equipment.addSensor(sensor);
         assertTrue(equipment.getSensors().contains(sensor));
     }
