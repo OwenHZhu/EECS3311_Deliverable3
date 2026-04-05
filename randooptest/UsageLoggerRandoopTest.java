@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class UsageLoggerRandoopTest {
+public class RegressionTest5 {
 
     public static boolean debug = false;
 
